@@ -1,0 +1,73 @@
+/*
+ * Colors -- Each class represents a judicial selection category.
+ *        -- colors MUST be defined as:
+ *             -- fill: for the states
+ *             -- background-color: for the state details table
+ */
+ /* Elections: Green (10-PRGn Diverging) */
+.elections {
+    fill: #00441b;
+    background-color: #00441b;
+}
+.retention_elections {
+    fill: #a6dba0;
+    background-color: #a6dba0;
+}
+.nonpartisan_elections {
+    fill: #5aae61;
+    background-color: #5aae61;
+}
+.partisan_elections {
+    fill: #1b7837;
+    background-color: #1b7837;
+}
+/* Appointments: Brown (10-BrBG Diverging) */
+.legislative_appointment {
+    fill: #8c510a;
+    background-color: #8c510a;
+}
+.supreme_court_appointment {
+    fill: #dfc27d;
+    background-color: #dfc27d;
+}
+.gubernatorial_appointment {
+    fill: #bf812d;
+    background-color: #bf812d;
+}
+/* Nominating Commission: Pink (10-PiYG) */
+.nominating_commission,
+.nonbinding_commission {
+    fill: #de77ae;
+    background-color: #de77ae;
+}
+.binding_commission,
+.commission_reappoints {
+    fill: #c51b7d;
+    background-color: #c51b7d;
+}
+/* Hybrids: Purples (9-class) */
+.hybrid {
+    fill: #3f007d;
+    background-color: #3f007d;
+}
+.missouri_plan {
+    fill: #6a51a3;
+    background-color: #6a51a3;
+}
+.varies {
+    fill: #f1a340;
+    background-color: #f1a340;
+}
+/* Confirmations: This is the Base color only.
+ * Patterns get generated and assigned via javascript.
+ * A change here needs a change in Javascript as well!!
+ */
+.confirmation {
+    fill: #fdae61;
+    background-color: #fdae61;
+}
+/* Base color */
+.not_applicable {
+    fill: gray;
+    background-color: gray;
+}

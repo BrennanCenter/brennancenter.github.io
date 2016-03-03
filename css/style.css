@@ -1,0 +1,272 @@
+/*
+ * Flexbox
+ */
+ body {
+    margin-left: 2em;
+    margin-right: 2em;
+ }
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-around;
+    align-items: stretch;
+}
+.viz {
+    width: 100%;
+}
+.intro-column {
+    flex: 1;
+    flex-grow: 1;
+    text-align: justify;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+#corpus {
+    justify-content: space-around;
+    align-content: space-around;
+    align-items: space-around;
+}
+#atlas {
+    flex-grow: 1;
+    flex: 1;
+}
+#abacus {
+    flex-grow: 1;
+    flex: 1;
+    margin-top: 1em;
+    padding-top: 1em;
+}
+.askus {
+    margin: 0 2.5rem;
+}
+#compass {
+    justify-content: flex-start;
+    padding-left: 20%;
+}
+#oculus {
+    align-items: stretch;
+}
+#locus {
+    flex: 0 2 65%;
+    order: 2;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+#locus .phase {
+    flex: 1;
+    flex-grow: 1;
+    text-align: center;
+}
+#locus h5 {
+    font-weight: bold;
+}
+#focus {
+    flex: 0 1.2 35%;
+    order: 1;
+}
+#focus .details {
+    margin: auto;
+    text-align: justify;
+    padding: 2em;
+}
+@media screen and (max-width: 767px) {
+    .flex-container,
+    #intro {
+        flex-direction: column;
+    }
+    #locus {
+        flex-wrap: wrap;
+        order: 1;
+    }
+    #focus {
+        order: 2;
+    }
+}
+/*
+ * Viz
+ */
+text, rect, g {
+    transition: all 0.5s ease;
+}
+.click-target {
+    fill-opacity: 0;
+    pointer-events: all;
+}
+use {
+    transition: stroke 0.5s ease, stroke-width 0.5s ease, opacity 0.5s ease;
+    fill: #4d4d4d;
+    stroke: azure;
+    stroke-width: 2px;
+}
+.state {
+  cursor: pointer;
+}
+.clicked {
+    stroke: black;
+}
+.state-icon {
+    opacity:  0.2;
+}
+.soften {
+    opacity: 0.2;
+}
+.transparent {
+    opacity: 0;
+}
+.legend {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: space-between;
+}
+.legend-row {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+
+    transition: all 0.5s ease-in-out;
+}
+.legend-item {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: space-between;
+
+    transition: all 500ms linear;
+}
+.legend-bar-container {
+    flex: 1;
+    flex-grow: 1;
+    flex-shrink: 1.5;
+    order: 1;
+    display: inline-flex;
+    flex-direction: row-reverse;
+    cursor: pointer;
+
+}
+.legend-label-container {
+    flex: 1;
+    flex-grow: 1.5;
+    order: 2;
+    flex-wrap: nowrap;
+    overflow: visible;
+            flex-shrink: 0;
+}
+.legend-bar {
+    border: 1px solid white;
+
+    transition: width 0.5s ease-in-out;
+}
+.kids {
+    flex: 0;
+    padding: 0;
+}
+.legend-label--text {
+    cursor: pointer;
+}
+#abacus text {
+    font-size: 90%;
+}
+.branch--closed text:before {
+    font-family: FontAwesome;
+    content: "\f196"; /* fa-square-plus-o */
+}
+.branch--opened text:before {
+    font-family: FontAwesome;
+    content: "\f147"; /* fa-square-minus-o */
+}
+.branch--leaf text:before {
+    font-family: FontAwesome;
+    content: "\f096"; /* fa-square-o */
+    visibility: hidden;
+}
+.legend-row--new {
+    max-height: 0;
+    opacity: 0;
+    animation:
+      openSpace 0.5s ease forwards,
+      moveIn 0.3s 0.2s ease forwards;
+}
+@keyframes openSpace {
+    to {
+        max-height: 120px;
+    }
+}
+@keyframes moveIn {
+    to {
+        opacity: 1;
+    }
+}
+.legend-row--remove {
+    max-height: 120px;
+    opacity: 1;
+    animation:
+      moveOut 0.3s 0.2s ease forwards,
+      closeSpace 0.5s ease forwards;
+}
+@keyframes closeSpace {
+    to {
+        max-height: 0;
+    }
+}
+@keyframes moveOut {
+    to {
+        opacity: 0;
+    }
+}
+
+path.domain, .tick line {
+    stroke: none;
+    fill: none;
+}
+#viztitle {
+    text-align: center;
+}
+#locus li {
+    transition: background-color 0.5s ease,
+        color 0.5s ease,
+        opacity 0.5s linear;
+
+    opacity: 0.25;
+}
+#locus li.hilite {
+    color: azure;
+    opacity: 1;
+}
+footer {
+    margin-top: 5em;
+}
+#tooltip {
+    line-height: 1;
+    font-weight: normal;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+    pointer-events: none;
+}
+#tooltip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    width: 100%;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    pointer-events: none;
+}
+#tooltip.hidden {
+    display: none;
+}
+
+#tooltip p {
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+    z-index: 9000;
+}
