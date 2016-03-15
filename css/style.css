@@ -15,12 +15,10 @@
     -webkit-box-pack: center;
             justify-content: center;
     align-content: space-around;
-    -webkit-box-align: stretch;
-            align-items: stretch;
+    -webkit-box-align: baseline;
+            align-items: baseline;
 }
-.viz {
-    width: 100%;
-}
+
 .intro-column {
     -webkit-box-flex: 1;
             flex: 1;
@@ -30,33 +28,49 @@
     margin-left: 1em;
     margin-right: 1em;
 }
-#corpus {
-    justify-content: space-around;
-    align-content: space-around;
-    -webkit-box-align: space-around;
-            align-items: space-around;
+
+.viz--half {
+    -webkit-box-flex: 0;
+            flex: 0 0 50%;
+    align-self: stretch;
+
 }
 #atlas {
-    -webkit-box-flex: 1;
-            flex-grow: 1;
-    flex: 1;
+    -webkit-box-ordinal-group: 3;
+            order: 2;
 }
 #abacus {
-    -webkit-box-flex: 1;
-            flex-grow: 1;
-    flex: 1;
     margin-top: 1em;
     padding-top: 1em;
+    -webkit-box-ordinal-group: 4;
+            order: 3;
+}
+.viz {
+    -webkit-box-flex: 1;
+            flex: 1 0 100%;
 }
 .askus {
     margin: 0 2.5rem;
+    flex-wrap: nowrap;
+}
+#corpus {
+    justify-content: space-around;
+    -webkit-box-align: center;
+            align-items: center;
+    -webkit-box-ordinal-group: 2;
+            order: 1;
 }
 #compass {
     -webkit-box-pack: start;
             justify-content: flex-start;
     padding-left: 20%;
+    -webkit-box-ordinal-group: 5;
+            order: 4;
 }
+
 #oculus {
+  -webkit-box-ordinal-group: 6;
+          order: 5;
     -webkit-box-align: stretch;
             align-items: stretch;
 }
@@ -89,6 +103,9 @@
     text-align: justify;
     padding: 2em;
 }
+#focus svg {
+    padding: 2em;
+}
 @media screen and (max-width: 767px) {
     .flex-container,
     #intro {
@@ -96,48 +113,81 @@
         -webkit-box-direction: normal;
                 flex-direction: column;
     }
+    .viz--half {
+        -webkit-box-flex: 1;
+                flex: 1 0 100%;
+        align-self: stretch;
+        min-height: 100%;
+        height: 100%;
+        max-height: 100%;
+    }
+    #abacus {
+        -webkit-box-ordinal-group: 3;
+                order: 2;
+    }
+    #atlas {
+        -webkit-box-ordinal-group: 4;
+                order: 3;
+    }
+    #oculus {
+        -webkit-box-ordinal-group: 5;
+                order: 4;
+    }
     #locus {
         flex-wrap: wrap;
         -webkit-box-ordinal-group: 2;
                 order: 1;
+        -webkit-box-pack: center;
+                justify-content: center;
     }
     #focus {
         -webkit-box-ordinal-group: 3;
                 order: 2;
     }
 }
+
 /*
  * Viz
  */
-text, rect, g {
-    -webkit-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-}
 .click-target {
     fill-opacity: 0;
     pointer-events: all;
 }
-use {
-    -webkit-transition: stroke 0.5s ease, stroke-width 0.5s ease, opacity 0.5s ease;
-    transition: stroke 0.5s ease, stroke-width 0.5s ease, opacity 0.5s ease;
-    fill: #4d4d4d;
+.state {
+    -webkit-transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease;
+    cursor: pointer;
+}
+.overlay {
+    -webkit-transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+.state > path {
+    -webkit-transition: fill 0.5s ease,
+        stroke 0.5s ease,
+        stroke-width 0.5s ease;
+    transition:
+        fill 0.5s ease,
+        stroke 0.5s ease,
+        stroke-width 0.5s ease;
     stroke: azure;
     stroke-width: 2px;
 }
-.state {
-  cursor: pointer;
-}
-.clicked {
+.clicked > path {
     stroke: black;
 }
 .state-icon {
-    opacity:  0.2;
+    opacity: 0.2;
 }
 .soften {
     opacity: 0.2;
 }
-.transparent {
-    opacity: 0;
+.soften > path {
+  fill: darkgrey;
+}
+.soften .overlay {
+  opacity: 0;
 }
 .legend {
     display: -webkit-box;
@@ -159,9 +209,12 @@ use {
             flex-direction: column;
     list-style-type: none;
 
-    -webkit-transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out,
+        opacity 0.3s ease-in-out;
 
-    transition: all 0.5s ease-in-out;
+    transition:
+        all 0.5s ease-in-out,
+        opacity 0.3s ease-in-out;
 }
 .legend-item {
     -webkit-box-flex: 1;
@@ -224,15 +277,15 @@ use {
 #abacus text {
     font-size: 90%;
 }
-.branch--closed text:before {
+.branch--closed span:before {
     font-family: FontAwesome;
     content: "\f196"; /* fa-square-plus-o */
 }
-.branch--opened text:before {
+.branch--opened span:before {
     font-family: FontAwesome;
     content: "\f147"; /* fa-square-minus-o */
 }
-.branch--leaf text:before {
+.branch--leaf span:before {
     font-family: FontAwesome;
     content: "\f096"; /* fa-square-o */
     visibility: hidden;
@@ -242,10 +295,10 @@ use {
     opacity: 0;
     -webkit-animation:
       openSpace 0.5s ease forwards,
-      moveIn 0.3s 0.2s ease forwards;
+      fadeIn 0.3s 0.2s ease forwards;
             animation:
       openSpace 0.5s ease forwards,
-      moveIn 0.3s 0.2s ease forwards;
+      fadeIn 0.3s 0.2s ease forwards;
 }
 @-webkit-keyframes openSpace {
     to {
@@ -257,24 +310,21 @@ use {
         max-height: 120px;
     }
 }
-@-webkit-keyframes moveIn {
+@-webkit-keyframes fadeIn {
     to {
         opacity: 1;
     }
 }
-@keyframes moveIn {
+@keyframes fadeIn {
     to {
         opacity: 1;
     }
 }
 .legend-row--remove {
     max-height: 120px;
-    opacity: 1;
     -webkit-animation:
-      moveOut 0.3s 0.2s ease forwards,
       closeSpace 0.5s ease forwards;
             animation:
-      moveOut 0.3s 0.2s ease forwards,
       closeSpace 0.5s ease forwards;
 }
 @-webkit-keyframes closeSpace {
@@ -287,17 +337,6 @@ use {
         max-height: 0;
     }
 }
-@-webkit-keyframes moveOut {
-    to {
-        opacity: 0;
-    }
-}
-@keyframes moveOut {
-    to {
-        opacity: 0;
-    }
-}
-
 path.domain, .tick line {
     stroke: none;
     fill: none;
@@ -323,6 +362,8 @@ footer {
     margin-top: 5em;
 }
 #tooltip {
+    display: inline;
+    position: relative;
     line-height: 1;
     font-weight: normal;
     padding: 12px;
@@ -330,10 +371,10 @@ footer {
     color: #fff;
     border-radius: 2px;
     pointer-events: none;
+    padding: 5px 15px;
 }
 #tooltip:after {
     box-sizing: border-box;
-    display: inline;
     font-size: 10px;
     width: 100%;
     line-height: 1;
@@ -344,7 +385,6 @@ footer {
 #tooltip.hidden {
     display: none;
 }
-
 #tooltip p {
     margin: 0;
     font-family: sans-serif;
