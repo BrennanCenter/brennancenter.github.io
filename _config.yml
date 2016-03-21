@@ -1,0 +1,28 @@
+timezone: US/Eastern
+
+author:
+  name: Seemant Kulleen
+  email: seemantk@gmail.com
+  url: http://seemantk.com
+  gihub: seemantk
+
+# Title of the window in the user's browser's
+title: Judicial Selections Across the US
+organization:
+  name: Brennan Center for Justice
+  url: http://brennancenter.org
+
+# Google Analytics:
+#   - Note: please paste the entire token, starting with "UA-",
+analytics:
+  provider: google
+  google:
+    tracking_id: 'UA-***'
+
+# The _introduction directory contains the intro columns
+collections:
+  introduction:
+    output: false
+
+# Users don't need these files
+exclude: ["Makefile", "package.json", "CNAME", "README.md", "colors.css", "style.css"]

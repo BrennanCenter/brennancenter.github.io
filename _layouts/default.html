@@ -37,28 +37,10 @@
         >
       </div><!--.page-header-->
 
+      <!-- Introduction -->
+      {% include introduction.html %}
+
       <!-- The Visualization -->
-      <div id="introduction">
-        <div id="title" class="row text-center">
-          <h1>Judicial Selection across the United States</h1>
-          <p class="lead">Welcome to the <a target="_blank" href="http://www.brennancenter.org/">Brennan Center for Justice’s</a> map of state judicial selection practices, part of the <a target="_blank" href="http://www.brennancenter.org/issues/fair-courts">Fair Courts Project’s</a> investigation into <a target="_blank" href="https://www.brennancenter.org/judicial-selection-21st-century">Judicial Selection for the 21st Century</a>.</p>
-        </div><!--.row-->
-        <div id="intro" class="flex-container">
-          <div class="intro-column">
-            <p>Each day, state court judges shape the country we live in. They interpret the law to resolve disagreements and protect the rights of people in the communities they serve. Yet in spite of their consistent importance state court judges are selected differently in nearly every state. The Brennan Center produced this interactive map to describe, compare, and evaluate selection processes across the country, and to help foster conversations about how those methods might be improved.</p>
-            <p>Not into maps? Go straight to the <a target="_blank" href="https://www.brennancenter.org/analysis/judicial-selection-frequently-asked-questions">summary statistics</a>.</p>
-          </div><!--.intro-column-->
-          <div class="intro-column">
-            <p>States select judges differently depending on both the level of state court and what type of judicial vacancy is being filled. Each state has several levels of courts, ranging from the trial court level to the state supreme court level. The type of vacancy, or “selection phase,” depends on when the seat becomes open and whether it involves an incumbent judge seeking re-selection for an additional term on the court. Use the two dropdown menus to view selection processes for a given court level and selection phase, or select “Overview” for a general summary of how each state selects its judges.</p>
-            <p>Click the “Reset” button at any time to return to the map’s starting position.</p>
-          </div><!--.intro-column-->
-          <div class="intro-column">
-            <p>Click to interact directly with the map and legend. Hover over any colored bar for a glance at the states included in that category, and click to highlight that group of states in the map. Groups with a (+) symbol expand with a click to display additional levels of detail. To learn more about a particular state, select it on the map or in the menu below. Hover over a confusing term for a brief definition or check out the Glossary of Terms for a more in-depth explanation.</p>
-            <p><a target="_blank" href="https://www.brennancenter.org/map-data">Download the table of sources</a> used to build the map.</p>
-          </div><!--.intro-column-->
-        </div><!--#intro.flex-container-->
-        <hr/>
-      </div><!--/#introduction-->
       <div id="viz" class="flex-container">
         <div id="corpus" class="viz askus flex-container">
           <button type="button" id="reset-all" class="btn btn-default btn-default">Reset Map</button>
@@ -102,18 +84,24 @@
           <div id="focus"></div>
         </div><!--/#oculus-->
       </div><!--/#viz-->
-      <div id="tooltip"></div>
+      <div id="tooltip" z-index="99"></div>
     </article>
     <footer>
       <hr>
       <p class="qqtext-muted text-center small">
-        <small>Made by <a target="_blank" href="http://seemantk.com">Seemant Kulleen</a> for the <a target="_blank" href="http://brennancenter.org">Brennan Center for Justice</a>.</small>
+        <small>
+            Made by <a target="_blank" href="{{ site.author.url }}">
+              {{ site.author.name }}
+            </a> for the <a target="_blank" href="{{ site.organization.url }}">
+              {{ site.organization.name }}
+            </a>.
+        </small>
       </p>
     </footer>
 
 
     <!-- Auxiliary files needed for this viz -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" charset="utf-8"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" charset="utf-8"></script>
 
     <script src="js/vendor/lodash.min.js" charset="utf-8"></script>

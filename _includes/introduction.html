@@ -1,0 +1,23 @@
+<div id="introduction">
+  <div id="title" class="row text-center">
+    <h1>Judicial Selection across the United States</h1>
+    <p class="lead">
+      Welcome to the <a target="_blank" href="http://www.brennancenter.org/">
+        Brennan Center for Justice’s
+      </a> map of state judicial selection practices, part of the
+      <a target="_blank" href="http://www.brennancenter.org/issues/fair-courts">
+        Fair Courts Project’s
+      </a> investigation into <a target="_blank" href="https://www.brennancenter.org/judicial-selection-21st-century">
+        Judicial Selection for the 21st Century
+      </a>.
+    </p>
+  </div><!--.row-->
+  <div id="intro" class="flex-container">
+    {% for intro in site.introduction %}
+    <div class="intro-column">
+      {{ intro.content }}
+    </div>
+    {% endfor %}
+  </div><!--#intro.flex-container-->
+  <hr/>
+</div><!--/#introduction-->
