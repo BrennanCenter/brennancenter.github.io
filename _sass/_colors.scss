@@ -68,7 +68,7 @@
       -webkit-repeating-linear-gradient(340deg, #fdae61, #fdae61 3px, rgba(255,255,255,0) 3px, rgba(255,255,255,0) 10px);
     background:
       repeating-linear-gradient(110deg, #fdae61, #fdae61 3px, rgba(255,255,255,0) 3px, rgba(255,255,255,0) 10px);
-    background-color: #fff;
+    background-color: lightgray;
 }
 #locus li.confirmation {
     background-color: #fdae61;
@@ -78,14 +78,14 @@
         -webkit-repeating-linear-gradient(340deg, #fdae61, #fdae61 3px, rgba(255,255,255,0) 3px, rgba(255,255,255,0) 10px);
     background:
         repeating-linear-gradient(110deg, #fdae61, #fdae61 3px, rgba(255,255,255,0) 3px, rgba(255,255,255,0) 10px);
-    background-color: #fff;
+    background-color: lightgray;
 }
 .other {
     background:
       -webkit-repeating-linear-gradient(80deg, #fdae61, #fdae61 3px, rgba(255,255,255,0) 3px, rgba(255,255,255,0) 10px);
     background:
       repeating-linear-gradient(10deg, #fdae61, #fdae61 3px, rgba(255,255,255,0) 3px, rgba(255,255,255,0) 10px);
-    background-color: #fff;
+    background-color: lightgray;
 }
 /* Base color */
 .not_applicable {
@@ -93,5 +93,22 @@
     background-color: gray;
 }
 .blank {
-    fill: white;
+    fill: lightgray;
+}
+/* State colors */
+.state > path {
+  stroke: azure;
+  stroke-width: 2px;
+}
+/* confirmation */
+.overlay {
+  stroke: red;
+}
+/* Softened colors */
+.clicked > path {
+    stroke: black;
+}
+.soften > path {
+  fill: white;
+  stroke: black;
 }
