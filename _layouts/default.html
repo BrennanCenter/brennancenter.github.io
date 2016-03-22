@@ -84,7 +84,7 @@
         </small>
       </p>
     </footer>
-    <script>
+    <script async>
         var cb = function() {
             var stylesheets = ['vendors.css', 'style.css'];
             stylesheets.forEach(function(css) {
@@ -101,7 +101,7 @@
         if (raf) raf(cb);
         else window.addEventListener('load', cb);
     </script>
-    
+
     <!-- Auxiliary files needed for this viz -->
     <script defer src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
     <script defer src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" charset="utf-8"></script>
