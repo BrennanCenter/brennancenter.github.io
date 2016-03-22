@@ -43,10 +43,21 @@ The main data is controlled in a Google Spreadsheet.  This spreadsheet serves as
   
 
 ### Colors
-The various colors in use on the site are easily configurable.
-Note: you will need to know the [hex-code](http://www.color-hex.com/) of the color you want to change.
+The various colors in use on the site are configurable in [one css stylesheet file](https://github.com/BrennanCenter/brennancenter.github.io/blob/master/_sass/_colors.scss).
+Click the pencil icon, which will then let you edit the file.
+When you are ready to commit, please put a brief description/reason for your change, and then click "Commit"
 
+### Introduction Text
+The introduction text is currently divided into three columns on a desktop view.  Each column is contained in a separate file.  So, simply go into the [_introduction](https://github.com/BrennanCenter/brennancenter.github.io/tree/master/_introduction) directory and edit the file which corresponds to the column that you want to change.
+
+To edit the file, click on its name, then click on the pencil icon.
+Please make sure to put a brief description/reason for your change when you commit the change.  Use [markdown](https://guides.github.com/features/mastering-markdown/) to format the text.  Markdown is easy to learn and easy to read by both humans and computers.
+
+### Site title, description, logo image, etc
+These are all configured in the [_config.yml file](https://github.com/BrennanCenter/brennancenter.github.io/blob/master/_config.yml)
+
+
+### Behavior/Transitions, New Visualizations
 
 The main functionality of the visualization is written in javascript, using the d3.js library. Thus, modification of code will require the services of someone familiar with javscript, and comfortable with d3.js.
 
-Additionally, the various 
