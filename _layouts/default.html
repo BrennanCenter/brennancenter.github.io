@@ -84,11 +84,24 @@
         </small>
       </p>
     </footer>
-    <!-- Minimal Bootstrap -->
-    <link href="css/vendors.css" rel="stylesheet" type="text/css">
-    <!-- Visualization stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <script>
+        var cb = function() {
+            var stylesheets = ['vendors.css', 'style.css'];
+            stylesheets.forEach(function(css) {
+              var l = document.createElement('link');
+              l.rel = 'stylesheet';
+              l.href = 'css/' + css;
+              var h = document.getElementsByTagName('head')[0];
+              h.parentNode.insertBefore(l, h);
+            })
 
+        };
+        var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+            webkitRequestAnimationFrame || msRequestAnimationFrame;
+        if (raf) raf(cb);
+        else window.addEventListener('load', cb);
+    </script>
+    
     <!-- Auxiliary files needed for this viz -->
     <script defer src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
     <script defer src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" charset="utf-8"></script>
