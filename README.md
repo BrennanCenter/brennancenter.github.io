@@ -3,6 +3,11 @@ This is the website that hosts the Judicial Selection Map of the U.S. The files 
 The site is hosted on GitHub, and by default is at brennancenter.github.io
 
 ## Updates
+The importance of Commit Messages. Throughout this document, you will see mention of commit messages.  This web application will likely be maintained/updated by different people at different times.  And sometimes, you might make a change at one point, and then go back a few months later only to try and remember what you were thinking at the time you'd made that change.  A commit message is a favor to your future self, and any other people in the future, who are trying to understand what the status of the visualization is.
+
+A commit message is just like an email message: a short subject to summarize the changes you've made, and a longer message (if necessary only) to put any important details.  It's like "the ship's log" in a way -- it maps the journey of this visualization.
+
+Also: the Github interface only enables the "Commit changes" button when you have typed in a commit message subject.
 
 ### Data
 #### Main data
