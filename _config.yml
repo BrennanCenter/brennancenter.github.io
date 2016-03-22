@@ -12,6 +12,10 @@ organization:
   name: Brennan Center for Justice
   url: http://brennancenter.org
 
+# Extra Software needed (that github-pages supports)
+gems:
+  - jekyll-coffeescript
+
 # Google Analytics:
 #   - Note: please paste the entire token, starting with "UA-",
 analytics:
@@ -25,4 +29,4 @@ collections:
     output: false
 
 # Users don't need these files
-exclude: ["Makefile", "package.json", "CNAME", "README.md", "colors.css", "style.css"]
+exclude: ["js/vendor/*.js", "css/vendor/*.css",  "Makefile", "$package.json", "CNAME", "README.md", "colors.css", "style.css"]
