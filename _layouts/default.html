@@ -7,7 +7,7 @@
     <meta name="author" content="{{ site.author.name }}">
 
     <title>{{ site.title }}</title>
-  <!-- Favicon -->
+
     <link rel="shortcut icon" href="{{ site.organization.favicon }}"
         type="image/vnd.microsoft.icon"/>
 
@@ -86,16 +86,13 @@
     </footer>
     <script defer>
         var cb = function() {
-            var stylesheets = ['vendors.css', 'style.css'];
-            stylesheets.forEach(function(css) {
-              var l = document.createElement('link');
-              l.rel = 'stylesheet';
-              l.href = 'css/' + css;
-              var h = document.getElementsByTagName('head')[0];
-              h.parentNode.insertBefore(l, h);
-            })
-
-        };
+            var l = document.createElement('link');
+            l.rel = 'stylesheet';
+            l.href = 'css/style.css';
+            var h = document.getElementsByTagName('head')[0];
+            h.parentNode.insertBefore(l, h);
+          }
+        ;
         var raf = requestAnimationFrame || mozRequestAnimationFrame ||
             webkitRequestAnimationFrame || msRequestAnimationFrame;
         if (raf) raf(cb);
