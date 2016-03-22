@@ -1,7 +1,7 @@
 ---
 ---
-{% include_relative vendor/bootstrap.min.css %}
-{% include_relative vendor/font-awesome.min.css %}
-
 @import "colors";
 @import "layout";
+
+{% include_relative vendor/bootstrap.min.css %}
+{% include_relative vendor/font-awesome.min.css %}
