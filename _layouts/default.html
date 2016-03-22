@@ -8,7 +8,8 @@
 
     <title>{{ site.title }}</title>
   <!-- Favicon -->
-    <link rel="shortcut icon" href="http://www.brennancenter.org/sites/all/themes/bcj-zen/favicon.ico" type="image/vnd.microsoft.icon" />
+    <link rel="shortcut icon" href="{{ site.organization.favicon }}"
+        type="image/vnd.microsoft.icon"/>
 
     {% include shims.html %}
   </head>
@@ -16,7 +17,7 @@
   <body id="page-top" class="index">
     <article>
       <div class="page-header text-center">
-        <img src="/img/bcj_logo.png"
+        <img src="{{ site.organization.logo }}"
           alt="Brennan Center for Justice at NYU"
           class="img-responsive center-block"
         >
