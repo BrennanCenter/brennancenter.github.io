@@ -62,7 +62,7 @@ Please make sure to put a brief description/reason for your change when you comm
 These are all configured in the [_config.yml file](https://github.com/BrennanCenter/brennancenter.github.io/blob/master/_config.yml)
 
 ### Google Analytics
-Ensure you have an account to track this site.  From there, you can paste the cookie ID (beginning with "UA-") into the [_config.yml](https://github.com/BrennanCenter/brennancenter.github.io/blob/master/_config.yml file as well.
+Ensure you have an account to track this site.  From there, you can paste the cookie ID (beginning with "UA-") into the [_config.yml](https://github.com/BrennanCenter/brennancenter.github.io/blob/master/_config.yml) file as well.
 
 
 ### Behavior/Transitions, New Visualizations
