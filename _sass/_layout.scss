@@ -1,31 +1,7 @@
 /*
  * Flexbox
  */
- body {
-    margin-left: 2em;
-    margin-right: 2em;
- }
-.flex-container {
-    display: -webkit-box;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-            flex-direction: row;
-    flex-wrap: wrap;
-    -webkit-box-pack: center;
-            justify-content: center;
-    align-content: space-around;
-    -webkit-box-align: baseline;
-            align-items: baseline;
-}
 
-.intro-column {
-    -webkit-box-flex: 1;
-            flex: 1 1 0%;
-    text-align: justify;
-    margin-left: 1em;
-    margin-right: 1em;
-}
 
 .viz--half {
     -webkit-box-flex: 0;
@@ -58,9 +34,6 @@
     -webkit-box-ordinal-group: 2;
             order: 1;
 }
-#corpus > * {
-	max-width: 100%;
-}
 #compass {
     -webkit-box-pack: start;
             justify-content: flex-start;
@@ -70,8 +43,8 @@
 }
 
 #oculus {
-    -webkit-box-ordinal-group: 6;
-            order: 5;
+  -webkit-box-ordinal-group: 6;
+          order: 5;
     -webkit-box-align: stretch;
             align-items: stretch;
 }
@@ -85,7 +58,9 @@
 }
 #locus .phase {
     -webkit-box-flex: 1;
-            flex: 1 1 0%;
+            flex: 1;
+    -webkit-box-flex: 1;
+            flex-grow: 1;
     text-align: center;
 }
 #locus h5 {
@@ -106,12 +81,6 @@
     padding: 2em;
 }
 @media screen and (max-width: 767px) {
-    .flex-container,
-    #intro {
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-                flex-direction: column;
-    }
     .viz--half {
         -webkit-box-flex: 1;
                 flex: 1 0 100%;
@@ -170,18 +139,12 @@
         fill 0.5s ease,
         stroke 0.5s ease,
         stroke-width 0.5s ease;
-    stroke: azure;
-    stroke-width: 2px;
 }
-.clicked > path {
-    stroke: black;
-}
-#abacus .soften {
+.state-icon {
     opacity: 0.2;
 }
-.soften > path {
-  fill: azure;
-  stroke: darkgray;
+.soften {
+    opacity: 0.2;
 }
 .soften .overlay {
   opacity: 0;
@@ -198,7 +161,7 @@
 }
 .legend-row {
     -webkit-box-flex: 1;
-            flex: 1 1 0%;
+            flex: 1;
     display: -webkit-box;
     display: flex;
     -webkit-box-orient: vertical;
@@ -215,7 +178,7 @@
 }
 .legend-item {
     -webkit-box-flex: 1;
-            flex: 1 1 0%;
+            flex: 1;
     display: -webkit-box;
     display: flex;
     -webkit-box-orient: horizontal;
@@ -231,11 +194,10 @@
 }
 .legend-bar-container {
     -webkit-box-flex: 1;
-            flex: 1 1 0%;
+            flex: 1;
     -webkit-box-flex: 1;
             flex-grow: 1;
     flex-shrink: 1.5;
-	flex-basis: auto;
     -webkit-box-ordinal-group: 2;
             order: 1;
     display: -webkit-inline-box;
@@ -248,15 +210,14 @@
 }
 .legend-label-container {
     -webkit-box-flex: 1;
-            flex: 1 1 0%;
+            flex: 1;
     -webkit-box-flex: 1.5;
             flex-grow: 1.5;
     -webkit-box-ordinal-group: 3;
             order: 2;
     flex-wrap: nowrap;
     overflow: visible;
-    flex-shrink: 0;
-	flex-basis: auto;
+            flex-shrink: 0;
 }
 .legend-bar {
     border: 1px solid white;
@@ -267,7 +228,7 @@
 }
 .kids {
     -webkit-box-flex: 0;
-            flex: 0 1 auto;
+            flex: 0;
     padding: 0;
 }
 .legend-label--text {
