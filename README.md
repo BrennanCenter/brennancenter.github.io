@@ -53,7 +53,7 @@ Click the pencil icon, which will then let you edit the file.
 When you are ready to commit, please put a brief description/reason for your change, and then click "Commit"
 
 ### Introduction Text
-The introduction text is currently divided into three columns on a desktop view.  Each column is contained in a separate file.  So, simply go into the [_introduction](https://github.com/BrennanCenter/brennancenter.github.io/tree/master/_introduction) directory and edit the file which corresponds to the column that you want to change. It should adjust to give you the same number of columns as the number of files in the directory, so delete a file for two columns, etc.
+The introduction text is currently divided into three columns on a desktop view.  Each column is contained in a separate file.  So, simply go into the [_introduction](https://github.com/BrennanCenter/brennancenter.github.io/tree/master/_introduction) directory and edit the file which corresponds to the column that you want to change. It should adjust to give you the same number of columns as the number of files in the directory, so delete a file for two columns, etc. Note: "{:target=_blank}" opens the link in a new tab. 
 
 To edit the file, click on its name, then click on the pencil icon.
 Please make sure to put a brief description/reason for your change when you commit the change.  Use [markdown](https://guides.github.com/features/mastering-markdown/) to format the text.  Markdown is easy to learn and easy to read by both humans and computers.
