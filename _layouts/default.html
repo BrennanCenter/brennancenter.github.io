@@ -12,6 +12,7 @@
         type="image/vnd.microsoft.icon"/>
 
     {% include shims.html %}
+    <link href="css/vendor/bootstrap.min.css" rel="stylesheet" type="text/css">
     <style>
       {% include critical_styles.css %}
     </style>
@@ -29,11 +30,12 @@
       <!-- Introduction -->
       {% include introduction.html %}
 
-      <!-- The Visualization -->
-      <div id="viz" class="flex-container">
-        <div id="corpus" class="viz askus flex-container">
-          <button type="button" id="reset-all" class="btn btn-default btn-default">Reset Map</button>
-          <div class="btn-group" id="chooser-Court" role="group" data-toggle="buttons">
+      <div class="container-fluid">
+        <div id="corpus" class="row askus">
+          <div class="reset-button col-md-4 col-xs-12">
+            <button type="button" class="btn btn-default btn-default">Reset Map</button>
+          </div><!--.not-btn-group-->
+          <div class="btn-group col-md-4 col-xs-12" id="chooser-Court" role="group" data-toggle="buttons">
             <label class="btn btn-default btn-default">
               <input type="radio" value="Supreme">
               <select>
@@ -41,7 +43,7 @@
               </select>
             </label>
           </div><!--.btn-group#chooser-Court-->
-          <div class="btn-group" id="chooser-Phase" role="group" data-toggle="buttons">
+          <div class="btn-group col-md-4 col-xs-12" id="chooser-Phase" role="group" data-toggle="buttons">
             <label class="choice-all btn btn-default btn-default">
               <input type="radio" value="all">Overview
             </label>
@@ -52,27 +54,30 @@
                 </select>
             </label>
           </div><!--.btn-group#chooser-Phase-->
-        </div><!--/#corpus-->
-        <div id="atlas" class="viz--half"><svg></svg></div>
-        <div id="abacus" class="viz--half"><ul class="abacus legend"></ul></div>
-        <div id="compass" class="viz askus flex-container">
-          <div class="btn-group" id="chooser-State" role="group" data-toggle="buttons">
-            <label class="choice-all btn btn-default">
-              <input type="radio" value="all">None
-            </label>
-            <label class="choice-pick btn btn-default">
-              <input type="radio" value="">
-                <select>
-                  <optgroup label="Select a State"></optgroup>
-                </select>
-            </label>
-          </div><!--.btn-group#chooser-State-->
-        </div><!--/#compass.clickus-->
-        <div id="oculus" class="viz flex-container">
-          <div id="locus" class="flex-container"></div>
-          <div id="focus"></div>
+        </div><!--.row#corpus-->
+        <div id="viz" class="row">
+          <div id="atlas" class="col-md-6 col-xs-12"><svg></svg></div>
+          <div id="abacus" class="col-md-6 col-xs-12"><ul class="abacus legend"></ul></div>
+          <div id="compass" class="col-md-12 col-xs-12">
+            <div class="btn-group col-md-4 col-xs-12" id="chooser-State" role="group" data-toggle="buttons">
+              <label class="choice-all btn btn-default">
+                <input type="radio" value="all">None
+              </label>
+              <label class="choice-pick btn btn-default">
+                <input type="radio" value="">
+                  <select>
+                    <optgroup label="Select a State"></optgroup>
+                  </select>
+              </label>
+            </div><!--.btn-group#chooser-State-->
+          </div><!--/#compass.clickus-->
+        </div><!--.row#viz-->
+        <div id="oculus" class="row">
+          <div id="focus" class="col-md-4 col-xs-12"></div>
+          <div id="locus" class="col-md-8 col-xs-12"></div>
         </div><!--/#oculus-->
       </div><!--/#viz-->
+      <div id="tooltip"></div>
     </article>
     <div id="tooltip" z-index="99"></div>
     <footer>

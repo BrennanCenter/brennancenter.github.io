@@ -65,8 +65,6 @@
 .confirmation {
     fill: #fdae61;
     background:
-      -webkit-repeating-linear-gradient(340deg, #fdae61, #fdae61 3px, rgba(255,255,255,0) 3px, rgba(255,255,255,0) 10px);
-    background:
       repeating-linear-gradient(110deg, #fdae61, #fdae61 3px, rgba(255,255,255,0) 3px, rgba(255,255,255,0) 10px);
     background-color: lightgray;
 }
@@ -75,14 +73,10 @@
 }
 .legislative {
     background:
-        -webkit-repeating-linear-gradient(340deg, #fdae61, #fdae61 3px, rgba(255,255,255,0) 3px, rgba(255,255,255,0) 10px);
-    background:
         repeating-linear-gradient(110deg, #fdae61, #fdae61 3px, rgba(255,255,255,0) 3px, rgba(255,255,255,0) 10px);
     background-color: lightgray;
 }
 .other {
-    background:
-      -webkit-repeating-linear-gradient(80deg, #fdae61, #fdae61 3px, rgba(255,255,255,0) 3px, rgba(255,255,255,0) 10px);
     background:
       repeating-linear-gradient(10deg, #fdae61, #fdae61 3px, rgba(255,255,255,0) 3px, rgba(255,255,255,0) 10px);
     background-color: lightgray;
@@ -94,21 +88,4 @@
 }
 .blank {
     fill: lightgray;
-}
-/* State colors */
-.state > path {
-  stroke: azure;
-  stroke-width: 2px;
-}
-/* confirmation */
-.overlay {
-  stroke: red;
-}
-/* Softened colors */
-.clicked > path {
-    stroke: black;
-}
-.soften > path {
-  fill: white;
-  stroke: black;
 }
