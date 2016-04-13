@@ -332,7 +332,7 @@ function atlas() {
         return widget;
       } // widget.control()
     ;
-    widget.resize = function(arg) {
+    widget.resize = function() {
         resize();
       } // widget.resize()
     ;
