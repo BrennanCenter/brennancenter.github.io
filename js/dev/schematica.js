@@ -123,7 +123,7 @@ queue()
       panels.corpus.start(getQueryVariables());
 
       window.onpopstate = function(event) { panels.corpus.start(getQueryVariables()); };
-      window.onresize = function(event) { panels.atlas.resize(); };
+      window.onresize = function(event) { panels.atlas.resize(); panels.abacus.resize(); };
   })
 ;
 
