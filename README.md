@@ -67,5 +67,5 @@ Ensure you have an account to track this site.  From there, you can paste the co
 
 ### Behavior/Transitions, New Visualizations
 
-The main functionality of the visualization is written in javascript, using the d3.js library. Thus, modification of code will require the services of someone familiar with javscript, and comfortable with d3.js.
+The main functionality of the visualization is written in javascript, using the d3.js library. Thus, modification of code will require the services of someone familiar with javscript, and comfortable with d3.js.  More instructions in the [wiki](https://github.com/BrennanCenter/brennancenter.github.io/wiki).
 
