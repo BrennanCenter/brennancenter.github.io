@@ -19,6 +19,6 @@
   "scripts": {
 	  "clean": "touch js/cats.js && rm js/cats.js",
 	  "concat": "npm run clean; cat js/dev/*.js > js/cats.js",
-	  "uglify": "npm run concat; uglifyjs -m -c -o js/cats.min.js js/cats.js"
+	  "minify": "npm run concat; uglifyjs -m -c -o js/cats.min.js js/cats.js"
   }
 }
