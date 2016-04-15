@@ -94,13 +94,13 @@ function abacus() {
 		  , row = self
 			  .append("div")
 				.attr("class", function(d) {
-					return "legend-item row "
-					  + d.children
-						? (d.fork
-							  ? "branch--opened"
-							  : "branch--closed"
-						  )
-						: "branch--leaf"
+					return "legend-item row " + (d.children
+							? (d.fork
+								  ? "branch--opened"
+								  : "branch--closed"
+							  )
+							: "branch--leaf"
+						)
 					;
 				  })
 				.classed("legend-item", true)
@@ -291,7 +291,6 @@ function abacus() {
 
 		function resize() {
 				dom.style("height", d3.select("#atlas").style("height"));
-				console.log(dom.style("height"));
 		} // resize()
 
 	/*
