@@ -1,9 +1,10 @@
 {
-  "name": "anonymous",
+  "name": "judicial_selection",
   "private": true,
-  "version": "0.0.1",
+  "version": "1.0.0",
   "dependencies": {
     "d3": "^3.5.6",
+    "hint.css": "^2.2.1",
     "lodash": "^3.10.1",
     "queue-async": "^1.0.7",
     "topojson": "1"
@@ -17,8 +18,8 @@
     "uglify-js": "^2.4.24"
   },
   "scripts": {
-	  "clean": "touch js/cats.js && rm js/cats.js",
-	  "concat": "npm run clean; cat js/dev/*.js > js/cats.js",
-	  "minify": "npm run concat; uglifyjs -m -c -o js/cats.min.js js/cats.js"
+    "clean": "touch js/cats.js && rm js/cats.js",
+    "concat": "npm run clean; cat js/dev/*.js > js/cats.js",
+    "minify": "npm run concat; uglifyjs -m -c -o js/cats.min.js js/cats.js"
   }
 }
