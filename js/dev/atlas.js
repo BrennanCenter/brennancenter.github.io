@@ -300,9 +300,6 @@ function atlas() {
 
     function resize() {
         // Set height of parent element
-        var el = d3.select(svg.node().parentNode)
-          , w = el.style("width")
-        ;
         if(~browser.indexOf("ie"))
             svg.style("width", "100%");
     } // resize()
