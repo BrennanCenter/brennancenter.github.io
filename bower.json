@@ -1,0 +1,22 @@
+{
+  "name": "judicial_selection",
+  "description": "Judicial Selection Processes across the United States",
+  "main": "",
+  "authors": [
+    "Seemant Kulleen <seemantk@gmail.com>"
+  ],
+  "license": "None",
+  "homepage": "https://github.com/BrennanCenter/brennancenter.github.io",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "d3-queue": "queue-async#^2.0.3",
+    "topojson": "^1.6.24"
+  }
+}
