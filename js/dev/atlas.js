@@ -9,7 +9,8 @@ function atlas() {
       , svg
       , dispatch
       , control
-      , tooltip = tellus()
+      , tooltip = d3.tip()
+            .attr("class", "d3-tip")
     ;
     /*
      * Main function object.  This gets returned all over the place,
@@ -17,11 +18,11 @@ function atlas() {
      *    Arguments: DOM element to which to attach the widget.
      */
     function widget(el) {
-        d3.select("#tooltip").call(tooltip);
         svg = el
             .datum(geogrify)
           .select("svg")
             .attr("viewBox", "0 0 " + width + " " + height)
+            .call(tooltip)
         ;
         if(~browser.indexOf("ie")) {
             svg
@@ -133,9 +134,12 @@ function atlas() {
                 ;
               })
             .on("mouseover", function(d) {
-                tooltip.show(this, d.feature.properties.name);
+                tooltip
+                    .html(d.feature.properties.name)
+                    .show()
+                ;
               })
-            .on("mouseout", tooltip.hide)
+            //.on("mouseout", tooltip.hide)
         ;
         // State Stamps
         svg.select("defs")
