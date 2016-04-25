@@ -40,7 +40,7 @@ function slugify(d)     {
     ;
 } // slugify()
 
-queue()
+d3_queue.queue()
   .defer(d3.text, files.bcj)
   .defer(d3.csv, files.info)
   .defer(d3.json, files.geo)
