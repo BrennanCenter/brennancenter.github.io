@@ -32,4 +32,4 @@ collections:
     output: false
 
 # Users don't need these files
-exclude: ["js/vendor/*.js", "css/vendor/*.css",  "Makefile", "$package.json", "CNAME", "README.md", "colors.css", "style.css"]
+exclude: ["js/vendor/*.js", "css/vendor/*.css",  "Makefile", "$package.json", "CNAME", "README.md", "colors.css", "style.css", "Gemfile", "Gemfile.lock", "*.log", "package.json", "bower.json", "bower_components", "node_modules" ]
