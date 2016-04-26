@@ -1,8 +1,9 @@
 ---
 ---
+{% include_relative vendor/bootstrap.min.css %}
+{% include_relative vendor/font-awesome.min.css %}
+{% include_relative vendor/balloon.min.css %}
+
 @import "colors";
 @import "layout";
 @import "d3-tip";
-
-{% include_relative vendor/bootstrap.min.css %}
-{% include_relative vendor/font-awesome.min.css %}
