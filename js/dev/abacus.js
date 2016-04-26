@@ -143,7 +143,7 @@ function abacus() {
 								;
 								return ref ? ref.Summary : "";
 						})
-					.attr("data-balloon-pos", "up")
+					.attr("data-balloon-pos", "left")
 					.attr("data-balloon-length", "large")
 				;
 				div
@@ -211,7 +211,7 @@ function abacus() {
 							;
 							return vals.length + " state" + (vals.length > 1 ? "s" : "") + ": " + vals.join(", ");
 						})
-					.attr("data-balloon-pos", "up")
+					.attr("data-balloon-pos", "right")
 					.attr("data-balloon-length", "large")
 				;
 				bar.select(".legend-bar")
