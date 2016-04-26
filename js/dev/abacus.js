@@ -2,9 +2,8 @@ function abacus() {
 		/* Private Vars */
 		var dom, ul
 		  , percent = d3.scale.linear()
-				.domain([0, 51])
-				.rangeRound([0, 100])
-		  , tooltip = tellus()
+							.domain([0, 51])
+							.rangeRound([0, 100])
 		  , reference // hold the tooltip data
 		  , dispatch // signaler
 		  , hilite
@@ -13,9 +12,8 @@ function abacus() {
 		 * Main function object
 		 */
 		function widget(el) {
-				d3.select("#tooltip").call(tooltip);
 				dom = el
-					.on("click", function() { clickbar(); })
+						.on("click", function() { clickbar(); })
 				;
 				ul = dom.select("ul");
 				resize();
@@ -44,10 +42,8 @@ function abacus() {
 						})
 				;
 				dom.datum(
-					treeify({ children: query.result })
-					  .map(function(d) {
-						  d.fork = false; return d;
-						})
+						treeify({ children: query.result })
+						  .map(function(d) { d.fork = false; return d;})
 				  )
 				;
 				hilite = false;
@@ -78,69 +74,77 @@ function abacus() {
 
 				if(hilite) {
 						var forked = li.filter(function(l) { return l.fork; });
-						li.classed("soften", forked.size() ? true : false);
-						forked.classed("soften", false);
-				} else
-						li.classed("soften", false)
-				;
+						li.selectAll(".legend-bar, .legend-label--text")
+								.classed("soften", forked.size() ? true : false)
+						;
+						forked.selectAll(".legend-bar, .legend-label--text")
+								.classed("soften", false)
+						;
+				} else {
+						li.selectAll(".legend-bar, .legend-label--text")
+								.classed("soften", false)
+						;
+				}
 		} // render()
 
 		function createLegendItem(l) {
 				var self = d3.select(this)
-						.attr("class", "level")
-						.classed("legend-row", true)
-						.classed(" legend-row--new", true)
-						.on("click", clickbar)
+							.attr("class", "level")
+							.classed("legend-row", true)
+							.classed(" legend-row--new", true)
+							.on("click", clickbar)
 				  , row = self
 					  .append("div")
-						.attr("class", function(d) {
-							return "legend-item row " + (d.children
-									? (d.fork
-										  ? "branch--opened"
-										  : "branch--closed"
-									  )
-									: "branch--leaf"
-								)
-							;
-						  })
-						.classed("legend-item", true)
-						.classed("row", true)
+							.attr("class", function(d) {
+									return "legend-item row " + (d.children
+											? (d.fork
+												  ? "branch--opened"
+												  : "branch--closed"
+											  )
+											: "branch--leaf"
+										)
+									;
+							  })
+							.classed("legend-item", true)
+							.classed("row", true)
 				;
 				var bar = row
 				  .append("div")
-					.attr("class", "col-xs-5 legend-bar-container")
-					.attr("role", "presentation")
-					.attr("pointer-events", "all")
-					.on("mouseout", tooltip.hide)
+						.attr("class", "col-xs-5 legend-bar-container")
+						.attr("role", "presentation")
+						.attr("pointer-events", "all")
+						.attr("data-balloon-pos", "up")
+						.attr("data-balloon-length", "small")
 				;
 				bar
 				  .append("div")
-					.attr("class", function(d) { return slugify(d.key); })
-					.classed("legend-bar", true)
-					.style("width", "0%")
+						.attr("class", function(d) { return slugify(d.key); })
+						.classed("legend-bar", true)
+						.style("width", "0%")
 				;
 				bar
 					.filter(function(d) {
-						return ~["Confirmation", "Body"].indexOf(d.level);
+							return ~["Confirmation", "Body"].indexOf(d.level);
 					  })
 					.each(function(d) {
-						d3.select(this).select(".legend-bar")
-							.classed(slugify(d.values[0].value.Category), true)
-						;
+							d3.select(this).select(".legend-bar")
+								.classed(slugify(d.values[0].value.Category), true)
+							;
 					  })
 				;
 				var div = row
 				  .append("div")
 						.attr("class", "col-xs-7 legend-label-container")
 						.attr("pointer-events", "all")
-						.on("mouseover", function(d) {
+						.attr("data-balloon", function(d) {
 								var ref =  reference[d.key]
 										|| reference[d.parent.key]
 										|| reference[d.parent.parent.key]
 								;
-								tooltip.show(this, ref ? ref.Summary : "");
-						  })
-						.on("mouseout", tooltip.hide)
+								return ref ? ref.Summary : "";
+						})
+					.attr("data-balloon-pos", "up")
+					.attr("data-balloon-length", "large")
 				;
 				div
 				  .append("span")
@@ -198,53 +202,53 @@ function abacus() {
 					  })
 				;
 				var bar = self.select(".legend-bar-container")
-					.on("mouseover", function(d) {
-						tooltip.show(
-							this
-						  , d.values
-								.map(function(v) { // hybrid processes
-									var ref = v.values ? v.values[0] : v.value;
-									return ref.State;
-								  })
-								.join("<br>")
-						);
-					  })
+					.attr("data-balloon", function(d) {
+							var vals = d.values
+									.map(function(v) { // hybrid processes
+											var ref = v.values ? v.values[0] : v.value;
+											return ref.State;
+									  })
+							;
+							return vals.length + " state" + (vals.length > 1 ? "s" : "") + ": " + vals.join(", ");
+						})
+					.attr("data-balloon-pos", "up")
+					.attr("data-balloon-length", "large")
 				;
 				bar.select(".legend-bar")
-					.style("width", function(d) {
-						return percent(d.values.length) + "%";
-					  })
-				  .filter(function(d) {
-						return ~["Confirmation", "Body"].indexOf(d.level);
-					  })
-					.each(function(d) {
-						var self = d3.select(this)
-						  , confirmer = d.level === "Confirmation"
-							  ? d
-							  : d.parent
-						;
-						self
-							.classed(slugify(confirmer.key), true)
-						;
-					  })
+						.style("width", function(d) {
+								return percent(d.values.length) + "%";
+						  })
+					  .filter(function(d) {
+								return ~["Confirmation", "Body"].indexOf(d.level);
+						  })
+						.each(function(d) {
+								var self = d3.select(this)
+								  , confirmer = d.level === "Confirmation"
+										  ? d
+										  : d.parent
+								;
+								self
+										.classed(slugify(confirmer.key), true)
+								;
+						  })
 				;
 		} // updateLegendItem()
 
 		function deleteLegendItem(l) {
 				d3.select(this)
 				  .transition().duration(500)
-					.each("start", function(d) {
-						if(d.children) {
-							d3.select(this).select("ul")
-								.datum([])
-								.call(render, d.depth)
-							;
-						}
-						d3.select(this).classed("legend-row--remove", true);
-					  })
-					.each("end", function() {
-						d3.select(this).remove();
-					  })
+						.each("start", function(d) {
+								if(d.children) {
+									d3.select(this).select("ul")
+										.datum([])
+										.call(render, d.depth)
+									;
+							}
+								d3.select(this).classed("legend-row--remove", true);
+						  })
+						.each("end", function() {
+								d3.select(this).remove();
+						  })
 				;
 		} // deleteLegendItem()
 

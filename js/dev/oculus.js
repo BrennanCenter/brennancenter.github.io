@@ -4,14 +4,12 @@ function oculus() {
       , textbox
       , dispatch
       , reference
-      , tooltip = tellus()
     ;
 
     /*
      * Main Function Object
      */
     function widget(el) {
-        d3.select("#tooltip").call(tooltip);
         dom = el;
         textbox = dom.select("#focus");
         draw();
@@ -34,8 +32,9 @@ function oculus() {
         phase
           .append("h5")
             .html(identikey)
-            .on("mouseover", function(d) { tooltip.show(this, reference[d.key].Summary); })
-            .on("mouseout", tooltip.hide)
+            .attr("data-balloon", function(d) { return reference[d.key].Summary; })
+            .attr("data-balloon-pos", "up")
+            .attr("data-balloon-length", "medium")
         ;
         phase = phase
           .append("ul")
@@ -60,9 +59,11 @@ function oculus() {
             )
           .enter().append("li")
             .attr("class", "process")
+            .attr("data-balloon", function(d) { return reference[d.key].Summary; })
+            .attr("data-balloon-pos", "left")
+            .attr("data-balloon-length", "large")
+          .append("span")
             .html(identikey)
-            .on("mouseover", function(d) { tooltip.show(this, reference[d.key].Summary); })
-            .on("mouseout", tooltip.hide)
         ;
     } // draw()
 
@@ -92,8 +93,10 @@ function oculus() {
                       : d.key
                     );
                   })
-                .classed("hilite", true)
                 .classed("process", true)
+              ;
+              li.select("span")
+                .classed("hilite", true)
                 .html(function(d) {
                     if(d.values.length > 1) // assumes multiple election types
                         return d.values
@@ -112,18 +115,20 @@ function oculus() {
                       : d.values[0].Type || d.values[0].Process
                     ;
                   })
-            ;
-            // Exit selection - clear out unused rows
-            li.exit()
-                .attr("class", "process")
-                .html(identikey)
-            ;
-          })
+              ;
+              // Exit selection - clear out unused rows
+              li.exit()
+                  .attr("class", "process")
+                .select("span")
+                  .html(identikey)
+              ;
+            })
         ;
         // Exit selection - clear out all rows
         phase.exit().each(function() {
             d3.select(this).selectAll("li")
                 .attr("class", "process")
+              .select("span")
                 .html(identikey)
             ;
           })
