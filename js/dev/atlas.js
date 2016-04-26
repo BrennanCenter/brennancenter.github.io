@@ -139,7 +139,7 @@ function atlas() {
                     .show()
                 ;
               })
-            //.on("mouseout", tooltip.hide)
+            .on("mouseout", tooltip.hide)
         ;
         // State Stamps
         svg.select("defs")
