@@ -209,7 +209,10 @@ function abacus() {
 											return ref.State;
 									  })
 							;
-							return vals.length + " state" + (vals.length > 1 ? "s" : "") + ": " + vals.join(", ");
+							return vals.length
+								+ " state"+ (vals.length > 1 ? "s" : "") + ": "
+								+ vals.join(", ")
+							;
 						})
 					.attr("data-balloon-pos", "right")
 					.attr("data-balloon-length", "large")
@@ -284,10 +287,11 @@ function abacus() {
 						result = [root].concat(kids)
 								.filter(function(d) { return d.depth; })
 						;
-						hilite = true;
+						hilite = b.fork;
 						depth = b.depth + 1;
 				} else {
 						ul.datum().forEach(function(s) { s.fork = false; });
+						hilite = false;
 				}
 				ul.call(render, depth);
 				dispatch.hilite({ result: result, hilite: hilite });
