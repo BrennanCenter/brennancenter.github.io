@@ -4,6 +4,8 @@ function oculus() {
       , textbox
       , dispatch
       , reference
+      , state
+      , content = null
     ;
 
     /*
@@ -71,11 +73,11 @@ function oculus() {
      * Signal Responders
      */
     function display(query) {
-        var state;
-        if(query.State && query.State !== "all")
-            state = dom.datum()[query.State][query.Court]
+        state = (query.State && query.State !== "all")
+          ? dom.datum()[query.State][query.Court]
+          : null
         ;
-        textbox.html(state ? state.description : null)
+        textbox.html(state ? state.description : content)
         var phase = dom.select("#locus").selectAll("div")
               .data(state ? state.values : [], identikey)
         ;
@@ -136,12 +138,16 @@ function oculus() {
     } // display()
 
     function hilite(arg) {
-        var hl = arg.result.filter(function(d) { return d.fork; });
-        if(hl.length) {
-            display({});
-            var text = reference[hl[0].key];
-            textbox.html(text ? text.Description : null);
+        var text = null;
+        if(arg.hilite && !state) {
+            var d = arg.result[0]
+              , text = reference[d.key]
+                  || reference[d.parent.key]
+                  || reference[d.parent.parent.key]
+            ;
+            if(text) text = text.Description;
         }
+        content = text;
     } // hilite()
 
     /*
