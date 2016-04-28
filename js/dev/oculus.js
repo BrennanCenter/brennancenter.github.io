@@ -122,6 +122,7 @@ function oculus() {
               li.exit()
                   .attr("class", "process")
                 .select("span")
+                  .classed("hilite", false)
                   .html(identikey)
               ;
             })
@@ -131,6 +132,7 @@ function oculus() {
             d3.select(this).selectAll("li")
                 .attr("class", "process")
               .select("span")
+                .classed("hilite", false)
                 .html(identikey)
             ;
           })
