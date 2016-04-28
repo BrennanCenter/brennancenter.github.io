@@ -165,16 +165,16 @@ function abacus() {
 		function updateLegendItem(l) {
 				var self = d3.select(this);
 				if(l.fork && l.children) {
-					self.select("ul")
-						.datum(l.children)
-						.call(render, l.depth)
-					;
+						self.select("ul")
+								.datum(l.children)
+								.call(render, l.depth)
+						;
 				}
 				if(!l.children) {
-					self.select("ul")
-						.datum([])
-						.call(render, l.depth + 1)
-					;
+						self.select("ul")
+								.datum([])
+								.call(render, l.depth + 1)
+						;
 				}
 				self.select(".legend-item")
 					.attr("class", function() {
