@@ -287,7 +287,7 @@ function abacus() {
 						result = [root].concat(kids)
 								.filter(function(d) { return d.depth; })
 						;
-						hilite = b.fork;
+						hilite = true;
 						depth = b.depth + 1;
 				} else {
 						ul.datum().forEach(function(s) { s.fork = false; });
