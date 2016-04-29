@@ -22,9 +22,8 @@ gems:
 # Google Analytics:
 #   - Note: please paste the entire token, starting with "UA-",
 analytics:
-  provider: google
   google:
-    tracking_id: 'UA-***'
+    tracking_id: '' # eg 'UA-***'
 
 # The _introduction directory contains the intro columns
 collections:
