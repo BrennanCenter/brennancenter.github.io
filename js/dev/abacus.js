@@ -74,14 +74,14 @@ function abacus() {
 
 				if(hilite) {
 						var forked = li.filter(function(l) { return l.fork; });
-						li.selectAll(".legend-bar, .legend-label--text")
+						li
 								.classed("soften", forked.size() ? true : false)
 						;
-						forked.selectAll(".legend-bar, .legend-label--text")
+						forked
 								.classed("soften", false)
 						;
 				} else {
-						li.selectAll(".legend-bar, .legend-label--text")
+						li
 								.classed("soften", false)
 						;
 				}
@@ -97,10 +97,7 @@ function abacus() {
 					  .append("div")
 							.attr("class", function(d) {
 									return "legend-item row " + (d.children
-											? (d.fork
-												  ? "branch--opened"
-												  : "branch--closed"
-											  )
+											? (d.fork ? "branch--opened" : "branch--closed")
 											: "branch--leaf"
 										)
 									;
@@ -179,10 +176,7 @@ function abacus() {
 				self.select(".legend-item")
 					.attr("class", function() {
 						return l.children
-						  ? ( l.fork
-								? "branch--opened"
-								: "branch--closed"
-							  )
+						  ? (l.fork ? "branch--opened" : "branch--closed")
 						  : "branch--leaf"
 					  })
 					.classed("legend-item", true)
@@ -260,16 +254,15 @@ function abacus() {
 		**/
 		function joiner(d) {
 				return [
-					  d.key
-					, d.depth
-					, (d.parent && d.parent.depth) ? d.parent.key : null
+						  d.key
+						, d.depth
+						, (d.parent && d.parent.depth) ? d.parent.key : null
 				  ]
 				;
 		} // joiner()
 
 		function clickbar(b) {
 				d3.event.stopPropagation();
-				hilite = false;
 
 				var result = ul.datum()
 				  , depth = 1
