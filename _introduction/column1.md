@@ -4,4 +4,4 @@ Each day, state court judges shape the country we live in. They interpret the la
 
 Not into maps? Go straight to the [significant figures of judicial selection](https://www.brennancenter.org/analysis/judicial-selection-frequently-asked-questions){:target="_blank"}.
 
-Download the [table of sources](https://www.brennancenter.org/map-data){:target="_blank"}. used to build the map.
+Download the [table of sources](https://www.brennancenter.org/map-data){:target="_blank"} used to build the map.
