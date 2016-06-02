@@ -37,6 +37,7 @@ function slugify(d)     {
         .split("'").join()
         .split(':').join()
         .split(' ').join('_')
+        .split('/').join('_')
     ;
 } // slugify()
 
