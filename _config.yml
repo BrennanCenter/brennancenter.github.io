@@ -13,6 +13,7 @@ organization:
   name: Brennan Center for Justice
   url: http://brennancenter.org
   logo: /img/bcj_logo.png
+  logo_caption: Go to the main Brennan Center for Justice website.
   favicon: http://www.brennancenter.org/sites/all/themes/bcj-zen/favicon.ico
 
 # Extra Software needed (that github-pages supports)
