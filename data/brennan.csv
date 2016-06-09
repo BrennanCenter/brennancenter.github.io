@@ -258,11 +258,11 @@ New Jersey,NJ,State Supreme Court,Yes,Nonbinding Commission,Yes,Yes,Senate,,No,N
 
 <p><strong>Age/Term Limits:</strong> There is no limit on the number of terms a justice may serve but there is a mandatory retirement age of 70.</p>
 "
-New Mexico,NM,State Supreme Court,Yes,Binding Commission,Yes,No,No,,No,No,No,No,Gubernatorial Appointment,No,No,No,No,No,,No,Yes,Partisan,No,Partisan Elections,No,No,No,No,No,,No,Yes,Retention,No,Retention Elections,No,No,No,Yes,No,No,No,No,"<p><strong>Filling an Interim Vacancy:</strong> When a seat on the New Mexico Supreme Court becomes open in the middle of a justice’s term, the governor appoints a judicial candidate from a list provided by a judicial nominating commission. An appointed justice serves the remainder of the unexpired term.</p>
+New Mexico,NM,State Supreme Court,Yes,Binding Commission,Yes,No,No,,No,No,No,No,Gubernatorial Appointment,Yes,Binding Commission,Yes,No,No,,No,No,No,No,Gubernatorial Appointment,No,No,No,No,No,,No,Yes,"Partisan, Retention",No,Hybrid,No,No,No,No,No,No,Yes,No,"<p><strong>Filling an Interim Vacancy:</strong> When a seat on the New Mexico Supreme Court becomes open in the middle of a justice’s term, the governor appoints a judicial candidate from a list provided by a judicial nominating commission. An appointed justice serves until the next general election. During the election, multiple candidates may vie for the seat in a partisan election. The elected judge serves the remainder of the unexpired term.</p>
 
-<p><strong>Filling a Vacancy at the End of a Justice’s Term:</strong> When a seat becomes open at the end of a justice’s term (for example, due to retirement or the loss of a retention election), the vacancy is filled through a partisan election, where multiple candidates may vie for the seat. The elected justice serves an eight-year term.</p>
+<p><strong>Filling a Vacancy at the End of a Justice’s Term:</strong> When a seat becomes open at the end of a justice’s term (for example, due to retirement or the loss of a retention election), the governor appoints a judicial candidate from a list provided by a judicial nominating commission.</p>
 
-<p><strong>Additional Terms:</strong> A sitting justice approaching the end of her first full term may stand in an unopposed yes/no retention vote. If retained by the voting public (at least 57% affirmative votes) she serves another eight-year term. She may stand for additional eight-year terms in the same retention process.</p>
+<p><strong>Additional Terms:</strong> A sitting justice must compete in a partisan election during the first general election after her appointment. If she is successful in the partisan election, she serves the remainder of the seat's eight year term. A justice approaching the end of that full term may stand in an unopposed yes/no retention vote. If retained by the voting public (at least 57% affirmative votes) she serves another eight-year term. She may stand for additional eight-year terms in the same retention process.</p>
 
 <p><strong>Age/Term Limits:</strong> There is no limit on the number of terms a justice may serve or an age at which they are prevented from holding office.</p>
 "
@@ -276,9 +276,9 @@ New York,NY,State Supreme Court,Yes,Binding Commission,Yes,Yes,Senate,,No,No,No,
 "
 North Carolina,NC,State Supreme Court,No,No,Yes,No,No,,No,No,No,No,Gubernatorial Appointment,No,No,No,No,No,,No,Yes,Nonpartisan,No,Nonpartisan Elections,No,No,No,No,No,,No,Yes,Nonpartisan,No,Nonpartisan Elections,No,No,Yes,No,No,No,No,No,"<p><strong>Filling an Interim Vacancy:</strong> When a seat on the North Carolina Supreme Court becomes open in the middle of a justice’s term, the governor appoints a judicial candidate to the empty seat on the bench. The appointed justice holds office until North Carolina’s next general election more than 60 days after the vacancy occurred. During the election, multiple candidates may vie for the seat in a nonpartisan election. The elected justice serves the remainder of the unexpired term.</p>
 
-<p><strong>Filling a Vacancy at the End of a Justice’s Term:</strong> When a seat becomes open at the end of a justice’s term (for example, due to retirement or the loss of a retention election), the vacancy is filled through a nonpartisan election, where multiple candidates may vie for the seat. The elected justice serves an eight-year term.</p>
+<p><strong>Filling a Vacancy at the End of a Justice’s Term:</strong> When a seat becomes open at the end of a justice’s term (for example, due to retirement), the vacancy is filled through a nonpartisan election, where multiple candidates may vie for the seat. The elected justice serves an eight-year term.</p>
 
-<p><strong>Additional Terms:</strong> A sitting justice approaching the end of her first full term may stand in an unopposed yes/no retention vote. If retained by the voting public she serves another eight-year term. She may stand for additional eight-year terms in the same retention process.</p>
+<p><strong>Additional Terms:</strong> A sitting justice approaching the end of her first full term may seek additional eight-year terms through participating in a nonpartisan election, where multiple candidates may vie for the seat.</p>
 
 <p><strong>Age/Term Limits:</strong> There is no limit on the number of terms a justice may serve but there is a mandatory retirement age of 72.</p>
 "
@@ -625,11 +625,11 @@ New Jersey,NJ,Intermediate Appellate Courts,Yes,Nonbinding Commission,Yes,Yes,Se
 
 <p><strong>Age/Term Limits:</strong> There is no limit on the number of terms a judge may serve but there is a mandatory retirement age of 70.</p>
 "
-New Mexico,NM,Intermediate Appellate Courts,Yes,Binding Commission,Yes,No,No,,No,No,No,No,Gubernatorial Appointment,No,No,No,No,No,,No,Yes,Partisan,No,Partisan Elections,No,No,No,No,No,,No,Yes,Retention,No,Retention Elections,No,No,No,Yes,No,No,No,No,"<p><strong>Filling an Interim Vacancy:</strong> When a seat on the New Mexico Court of Appeals becomes open in the middle of a judge’s term, the governor appoints a judicial candidate from a list provided by a judicial nominating commission. An appointed judge serves the remainder of the unexpired term.</p>
+New Mexico,NM,Intermediate Appellate Courts,Yes,Binding Commission,Yes,No,No,,No,No,No,No,Gubernatorial Appointment,Yes,Binding Commission,Yes,No,No,,No,No,No,No,Gubernatorial Appointment,No,No,No,No,No,,No,Yes,"Partisan, Retention",No,Hybrid,No,No,No,No,No,No,Yes,No,"<p><strong>Filling an Interim Vacancy:</strong> When a seat on the New Mexico Court of Appeals becomes open in the middle of a judge’s term, the governor appoints a judicial candidate from a list provided by a judicial nominating commission. An appointed judge serves until the next general election. During the election, multiple candidates may vie for the seat in a partisan election. The elected judge serves the remainder of the unexpired term.</p>
 
-<p><strong>Filling a Vacancy at the End of a Judge’s Term:</strong> When a seat becomes open at the end of a judge’s term (for example, due to retirement or the loss of a retention election), the vacancy is filled through a partisan election, where multiple candidates may vie for the seat. The elected judge serves an eight-year term.</p>
+<p><strong>Filling a Vacancy at the End of a Judge’s Term:</strong> When a seat becomes open at the end of a judge’s term (for example, due to retirement or the loss of a retention election), the governor appoints a judicial candidate from a list provided by a judicial nominating commission.</p>
 
-<p><strong>Additional Terms:</strong> A sitting judge approaching the end of her first full term may stand in an unopposed yes/no retention vote. If retained by the voting public (at least 57% affirmative votes) she serves another eight-year term. She may stand for additional eight-year terms in the same retention process.</p>
+<p><strong>Additional Terms:</strong> A sitting judge must compete in a partisan election during the first general election after her appointment. If she is successful in the partisan election, she serves the remainder of the seat's eight year term. A judge approaching the end of that full term may stand in an unopposed yes/no retention vote. If retained by the voting public (at least 57% affirmative votes) she serves another eight-year term. She may stand for additional eight-year terms in the same retention process.</p>
 
 <p><strong>Age/Term Limits:</strong> There is no limit on the number of terms a judge may serve or an age at which they are prevented from holding office.</p>
 "
@@ -1027,11 +1027,11 @@ New Jersey,NJ,Trial Courts,Yes,Nonbinding Commission,Yes,Yes,Senate,,No,No,No,No
 
 <p><strong>Age/Term Limits:</strong> There is no limit on the number of terms a judge may serve but there is a mandatory retirement age of 70.</p>
 "
-New Mexico,NM,Trial Courts,Yes,Binding Commission,Yes,No,,,No,No,No,No,Gubernatorial Appointment,No,No,No,No,No,,No,Yes,Partisan,No,Partisan Elections,No,No,No,No,No,,No,Yes,Retention,No,Retention Elections,No,No,No,Yes,No,No,No,No,"<p><strong>Filling an Interim Vacancy:</strong> When a seat on the New Mexico District Courts becomes open in the middle of a judge’s term, the governor appoints a judicial candidate from a list provided by a judicial nominating commission. An appointed judge serves the remainder of the unexpired term.</p>
+New Mexico,NM,Trial Courts,Yes,Binding Commission,Yes,No,,,No,No,No,No,Gubernatorial Appointment,Yes,Binding Commission,Yes,No,No,,No,No,No,No,Gubernatorial Appointment,No,No,No,No,No,,No,Yes,"Partisan, Retention",No,Hybrid,No,No,No,No,No,No,Yes,No,"<p><strong>Filling an Interim Vacancy:</strong> When a seat on the New Mexico District Courts becomes open in the middle of a judge’s term, the governor appoints a judicial candidate from a list provided by a judicial nominating commission. An appointed judge serves until the next general election. During the election, multiple candidates may vie for the seat in a partisan election. The elected judge serves the remainder of the unexpired term.</p>
 
-<p><strong>Filling a Vacancy at the End of a Judge’s Term:</strong> When a seat becomes open at the end of a judge’s term (for example, due to retirement or the loss of a retention election), the vacancy is filled through a partisan election, where multiple candidates may vie for the seat. The elected judge serves a six-year term.</p>
+<p><strong>Filling a Vacancy at the End of a Judge’s Term:</strong> When a seat becomes open at the end of a judge’s term (for example, due to retirement or the loss of a retention election), the governor appoints a judicial candidate from a list provided by a judicial nominating commission.</p>
 
-<p><strong>Additional Terms:</strong> A sitting judge approaching the end of her first full term may stand in an unopposed yes/no retention vote. If retained by the voting public (at least 57% affirmative votes) she serves another six-year term. She may stand for additional six-year terms in the same retention process.</p>
+<p><strong>Additional Terms:</strong> A sitting judge must compete in a partisan election during the first general election after her appointment. If she is successful in the partisan election, she serves the remainder of the seat's six year term. A judge approaching the end of that first full term may stand in an unopposed yes/no retention vote. If retained by the voting public (at least 57% affirmative votes) she serves another six-year term. She may stand for additional six-year terms in the same retention process.</p>
 
 <p><strong>Age/Term Limits:</strong> There is no limit on the number of terms a judge may serve or an age at which they are prevented from holding office.</p>
 "
@@ -1047,7 +1047,7 @@ North Carolina,NC,Trial Courts,No,No,Yes,No,,,No,No,No,No,Gubernatorial Appointm
 
 <p><strong>Filling a Vacancy at the End of a Judge’s Term:</strong> When a seat becomes open at the end of a judge’s term (for example, due to retirement), the vacancy is filled through a nonpartisan election, where multiple candidates may vie for the seat. The elected judge serves an eight-year term.</p>
 
-<p><strong>Additional Terms:</strong> A sitting justice approaching the end of her term may seek additional eight-year terms through participating in a nonpartisan election, where multiple candidates may vie for the seat.</p>
+<p><strong>Additional Terms:</strong> A sitting judge approaching the end of her term may seek additional eight-year terms through participating in a nonpartisan election, where multiple candidates may vie for the seat.</p>
 
 <p><strong>Age/Term Limits:</strong> There is no limit on the number of terms a judge may serve but there is a mandatory retirement age of 72.</p>
 "
