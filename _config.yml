@@ -12,9 +12,9 @@ description: "Judicial selection processes for all 50 states and DC. Covers all 
 organization:
   name: Brennan Center for Justice
   url: http://brennancenter.org
-  logo: /img/bcj_logo.png
+  logo: /img/bcj_logo.svg
   logo_caption: Go to the main Brennan Center for Justice website.
-  favicon: http://www.brennancenter.org/sites/all/themes/bcj-zen/favicon.ico
+  favicon: https://www.brennancenter.org/core/misc/favicon.ico
 
 # Extra Software needed (that github-pages supports)
 gems:
