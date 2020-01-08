@@ -3,19 +3,19 @@
   "private": true,
   "version": "1.0.0",
   "dependencies": {
+    "balloon-css": "^0.2.4",
     "d3": "^3.5.6",
     "d3-queue": "^2.0.3",
     "d3-tip": "^0.6.7",
-    "lodash": "^3.10.1",
-    "topojson": "1",
-    "balloon-css": "^0.2.4"
+    "lodash": "^4.17.15",
+    "topojson": "1"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.3",
     "bootstrap": "^3.3.6",
     "font-awesome": "^4.4.0",
-    "jquery": "^2.1.4",
-    "postcss-cli": "^2.5.1",
+    "jquery": "^3.4.1",
+    "postcss-cli": "^7.0.0",
     "uglify-js": "^2.4.24"
   },
   "scripts": {
