@@ -16,15 +16,15 @@ The main data is controlled in a Google Spreadsheet.  This spreadsheet serves as
   2. Select the "Vertical Data" tab.
   3. Make changes to the dataset here. Important: Please don't change any of the headers (rows 1-5).
   4. Download the tab as a CSV file to your computer
-    * On the spreadsheet, click the "File" menu
-    * Scroll down to "Download as"
-    * In the new list, scroll to "Comma-separated values (.csv, current sheet)"
-    * Confirm to "save" in the next dialog box
+      * On the spreadsheet, click the "File" menu
+      * Scroll down to "Download as"
+      * In the new list, scroll to "Comma-separated values (.csv, current sheet)"
+      * Confirm to "save" in the next dialog box
   5. Using your File Explorer application (e.g. Finder (Mac) or Windows Explorer):
-    * Find the Download folder (or wherever your csv file is downloaded)
-    * Rename the csv file:
-      * From: "Judicial Selection Dataset (Vertical Data).csv"
-      * To "brennan.csv"
+      * Find the Download folder (or wherever your csv file is downloaded)
+      * Rename the csv file:
+         * From: "Judicial Selection Dataset (Vertical Data).csv"
+         * To "brennan.csv"
   6. In your web browser, go to the [data/ subdirectory in this repository](https://github.com/BrennanCenter/brennancenter.github.io/tree/master/data)
   7. Click the "Upload Files" button and upload your brennan.csv file
   8. Make a comment and commit
