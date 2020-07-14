@@ -32,19 +32,19 @@ The main data is controlled in a Google Spreadsheet.  This spreadsheet serves as
 
 #### Tooltips/Descriptions
   1. On the same [Google spreadsheet](https://docs.google.com/spreadsheets/d/1-sU2EAuAO-C0TJQewpMSOWIFu4kIw2S_J961g2kDJKk/edit#gid=1290804713) as above, select the "Tooltips" tab
-    1. Make necessary changes
-    2. Select "File"
-    3. Select "Download as.."
-    4. Select "Comma-separated values (.csv, current sheet)"
-    5. Confirm the file should be saved.
+      1. Make necessary changes
+      2. Select "File"
+      3. Select "Download as.."
+      4. Select "Comma-separated values (.csv, current sheet)"
+      5. Confirm the file should be saved.
   2. Using Windows Explorer or Finder, as appropriate, go to the Downloads folder (or wherever the csv was saved)
   3. Rename the csv file
-    * From: "Judicial Selection Dataset (Tooltips).csv"
-    * To: "reference.csv"
+      * From: "Judicial Selection Dataset (Tooltips).csv"
+      * To: "reference.csv"
   4. In your web browser, go to the [data/ subdirectory in this repository](https://github.com/BrennanCenter/brennancenter.github.io/tree/master/data)
   5. Click the "Upload Files" button and upload your reference.csv file
   6. Make a comment and commit
-    * In your commit message, please summarize the changes that were made to the dataset
+      * In your commit message, please summarize the changes that were made to the dataset
   
 
 ### Colors
