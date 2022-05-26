@@ -15,6 +15,13 @@
     <style>
       {% include critical_styles.css %}
     </style>
+		
+    <script>
+      if (window.self === window.top) {
+        window.location = 'https://www.brennancenter.org/judicial-selection-map';
+      }
+    </script>
+	  
 		{% include google-analytics.html %}
   </head>
 
