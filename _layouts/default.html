@@ -17,6 +17,8 @@
     </style>
 		
     <script>
+      // If the live environment is not within an iframe, then redirect to the www site 
+      // (which contains this map in an iframe).
       if (window.location.host == 'judicialselectionmap.brennancenter.org' && window.self === window.top) {
         window.location = 'https://www.brennancenter.org/judicial-selection-map';
       }
