@@ -12,7 +12,7 @@
     "topojson": "1"
   },
   "devDependencies": {
-    "autoprefixer": "^6.3.3",
+    "autoprefixer": "^10.4.14",
     "bootstrap": "^3.3.6",
     "font-awesome": "^4.4.0",
     "jquery": "^3.4.1",
