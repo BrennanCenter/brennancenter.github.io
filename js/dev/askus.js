@@ -45,7 +45,7 @@ function askus() {
                           })
                       ;
                       dropdown.each(function(d, i) {
-                          d3.select(this).on("change").apply(this, [d, i]);
+                          d3.select(this).on("change").call(this, null, d, i);
                         })
                       ;
                 }
@@ -119,7 +119,7 @@ function askus() {
             ;
             if(dropdown.node().value) {
                 dropdown.each(function(d, i) {
-                    d3.select(this).on("change").apply(this, [d, i]);
+                    d3.select(this).on("change").call(this, null, d, i);
                   })
                 ;
                 buttons.pick.node().click();

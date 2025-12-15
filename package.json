@@ -4,24 +4,22 @@
   "version": "1.0.0",
   "dependencies": {
     "balloon-css": "^0.2.4",
-    "d3": "^3.5.6",
-    "d3-queue": "^2.0.3",
-    "d3-tip": "^0.6.7",
+    "d3": "^7.9.0",
+    "d3-v6-tip": "^1.0.9",
     "iframe-resizer": "^4.3.2",
     "lodash": "^4.17.21",
-    "topojson": "1"
+    "topojson-client": "^3.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.3",
-    "bootstrap": "^3.3.6",
+    "bootstrap": "^5.3.3",
     "font-awesome": "^4.4.0",
-    "jquery": "^3.4.1",
     "postcss-cli": "^7.0.0",
-    "uglify-js": "^2.4.24"
+    "terser": "^5.44.1"
   },
   "scripts": {
     "clean": "touch js/cats.js && rm js/cats.js",
     "concat": "npm run clean; cat js/dev/*.js > js/cats.js",
-    "minify": "npm run concat; uglifyjs -m -c -o js/cats.min.js js/cats.js"
+    "minify": "npm run concat; terser js/cats.js -c -m -o js/cats.min.js"
   }
 }

@@ -29,7 +29,7 @@ function oculus() {
         var phase = dom.select("#locus").selectAll("div")
               .data(data, identikey)
             .enter().append("div")
-                .attr("class", "phase col-md-4 col-xs-12")
+                .attr("class", "phase col-md-4 col-12")
         ;
         phase
           .append("h5")
@@ -155,50 +155,68 @@ function oculus() {
     /*
      * Helper function to slice the dataset by state and by phase
      */
+    // Helper to convert nested Map to plain object (D3 v7 compatibility)
+    function mapToObject(map) {
+        if (!(map instanceof Map)) return map;
+        var obj = {};
+        map.forEach(function(value, key) {
+            obj[key] = mapToObject(value);
+        });
+        return obj;
+    }
+
+    // Helper to convert d3.groups/d3.rollups [[key, value], ...] to [{key, values}, ...]
+    function convertToEntries(arr) {
+        if (!Array.isArray(arr)) return arr;
+        // Check if this looks like a groups/rollups result (array of [key, value] pairs)
+        if (arr.length > 0 && Array.isArray(arr[0]) && arr[0].length === 2) {
+            return arr.map(function(pair) {
+                return { key: pair[0], values: convertToEntries(pair[1]) };
+            });
+        }
+        return arr;  // Already in final form (e.g., rollup result)
+    }
+
     function byphase(arg) {
-        return d3.nest()
-            .key(function(d) { return d.Phase; })
-            .key(function(d) { return d.Process; })
-            .rollup(function(leaves) {
-                return d3.nest()
-                    .key(function(d) { return d.USPS; })
-                    .entries(leaves);
-                ;
-              })
-            .entries(arg.filter(function(d) { return d.Phase; }))
-            .map(function(d) {
-                d.values.sort(function(a, b) {
-                    return d3.ascending(a.key, b.key);
-                  })
-                ;
-                return d;
-              })
-        ;
+        var filtered = arg.filter(function(d) { return d.Phase; });
+        var result = d3.rollups(filtered,
+            function(leaves) {
+                return d3.groups(leaves, function(d) { return d.USPS; })
+                    .map(function(pair) { return { key: pair[0], values: pair[1] }; });
+            },
+            function(d) { return d.Phase; },
+            function(d) { return d.Process; }
+        );
+        return convertToEntries(result).map(function(d) {
+            d.values.sort(function(a, b) {
+                return d3.ascending(a.key, b.key);
+            });
+            return d;
+        });
     } // byphase()
 
     function bystate(arg) {
-        return d3.nest()
-            .key(function(d) { return d.USPS; })
-            .key(function(d) {
-                var crt = d.Court.split(' ');
-                crt.pop(); // pop the Court off the name
-                return crt.pop();
-              })
-            .rollup(function(leaves) {
-                var procs = d3.nest()
-                      .key(function(d) { return d.Phase; })
-                      .key(function(d) { return d.Process; })
-                    .entries(leaves.filter(function(d) { return d.Process; }))
-                , desc = leaves.filter(function(d) { return !d.Process; })[0]
-                ;
+        return mapToObject(d3.rollup(arg,
+            function(leaves) {
+                var procsData = leaves.filter(function(d) { return d.Process; });
+                var procs = convertToEntries(d3.groups(procsData,
+                    function(d) { return d.Phase; },
+                    function(d) { return d.Process; }
+                ));
+                var desc = leaves.filter(function(d) { return !d.Process; })[0];
                 return {
                     description: desc.Description
                   , overview: desc.Overview
                   , values: procs
                 };
-              })
-            .map(arg)
-        ;
+            },
+            function(d) { return d.USPS; },
+            function(d) {
+                var crt = d.Court.split(' ');
+                crt.pop(); // pop the Court off the name
+                return crt.pop();
+            }
+        ));
     } // bystate()
 
     /*

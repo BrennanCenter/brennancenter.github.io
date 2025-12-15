@@ -1,7 +1,7 @@
 function abacus() {
 		/* Private Vars */
 		var dom, ul
-		  , percent = d3.scale.linear()
+		  , percent = d3.scaleLinear()
 							.domain([0, 51])
 							.rangeRound([0, 100])
 		  , reference // hold the tooltip data
@@ -13,7 +13,7 @@ function abacus() {
 		 */
 		function widget(el) {
 				dom = el
-						.on("click", function() { clickbar(); })
+						.on("click", function(event) { clickbar(event); })
 				;
 				ul = dom.select("ul");
 				resize();
@@ -26,26 +26,25 @@ function abacus() {
 				// Parse the query results into a more usable format
 				// This step basically adds parent relationships to the dataset
 				// (which already has children relationships (via children or values))
-				var treeify = d3.layout.hierarchy()
-					  .value(function(d) {
-							  return d.depth * d.values
-									? d.values.length
-									: d.children
-									  ? d.children.length
-									  : 1
-							  ;
-						})
-					  .sort(function(a, b) {
-							  return d3.descending(a.values.length, b.values.length)
-									|| d3.ascending(a.key, b.key)
-						  	;
-						})
+				var root = d3.hierarchy({ children: query.result })
+					.sort(function(a, b) {
+						var aLen = a.data.values ? a.data.values.length : 0;
+						var bLen = b.data.values ? b.data.values.length : 0;
+						return d3.descending(aLen, bLen)
+							|| d3.ascending(a.data.key, b.data.key)
+						;
+					})
 				;
+				// Flatten hierarchy and merge data properties onto nodes (D3 v3 compatibility)
 				dom.datum(
-						treeify({ children: query.result })
-						  .map(function(d) { d.fork = false; return d;})
-				  )
-				;
+						root.descendants().map(function(node) {
+							Object.keys(node.data || {}).forEach(function(key) {
+								if (!(key in node)) node[key] = node.data[key];
+							});
+							node.fork = false;
+							return node;
+						})
+				);
 				hilite = false;
 				ul
 						.datum(dom.datum()[0].children)
@@ -57,19 +56,20 @@ function abacus() {
 				var li = sel.selectAll("li")
 					  .data(identity, joiner)
 				;
-				// ENTER selection
-				li.enter()
-				  .append("li")
-						.each(createLegendItem)
-				;
-				// UPDATE selections
-				li.each(updateLegendItem);
-
-				// EXIT Selection
+				// EXIT Selection (handle before enter/update in D3 v4+)
 				li.exit()
 						.filter(function(d) { return !hilite || d.depth === depth; })
 						.each(deleteLegendItem)
 				;
+				// ENTER selection
+				var liEnter = li.enter()
+				  .append("li")
+						.each(createLegendItem)
+				;
+				// MERGE enter + update (required in D3 v4+)
+				li = liEnter.merge(li);
+				// UPDATE selections (now includes entered elements)
+				li.each(updateLegendItem);
 				li.order();
 
 				if(hilite) {
@@ -107,7 +107,7 @@ function abacus() {
 				;
 				var bar = row
 				  .append("div")
-						.attr("class", "col-xs-5 legend-bar-container")
+						.attr("class", "col-5 legend-bar-container")
 						.attr("role", "presentation")
 						.attr("pointer-events", "all")
 						.attr("data-balloon-pos", "up")
@@ -131,7 +131,7 @@ function abacus() {
 				;
 				var div = row
 				  .append("div")
-						.attr("class", "col-xs-7 legend-label-container")
+						.attr("class", "col-7 legend-label-container")
 						.attr("pointer-events", "all")
 						.attr("data-balloon", function(d) {
 								var ref =  reference[d.key]
@@ -184,11 +184,11 @@ function abacus() {
 				;
 				self
 				  .transition().duration(duration)
-					.each("end", function() {
+					.on("end", function() {
 						d3.select(this)
 							.classed("legend-row--new", false)
 						;
-					  })
+					})
 				;
 				self.select(".legend-label--text")
 					.text(function() {
@@ -234,18 +234,18 @@ function abacus() {
 		function deleteLegendItem(l) {
 				d3.select(this)
 				  .transition().duration(500)
-						.each("start", function(d) {
+						.on("start", function(d) {
 								if(d.children) {
 									d3.select(this).select("ul")
 										.datum([])
 										.call(render, d.depth)
 									;
-							}
+								}
 								d3.select(this).classed("legend-row--remove", true);
-						  })
-						.each("end", function() {
+						})
+						.on("end", function() {
 								d3.select(this).remove();
-						  })
+						})
 				;
 		} // deleteLegendItem()
 
@@ -261,13 +261,13 @@ function abacus() {
 				;
 		} // joiner()
 
-		function clickbar(b) {
-				d3.event.stopPropagation();
+		function clickbar(event, b) {
+				if (event) event.stopPropagation();
 
 				var result = ul.datum()
 				  , depth = 1
 				;
-				if(arguments.length) {
+				if(b !== undefined) {
 						var to_fork = !b.fork;
 						b.parent.children.forEach(function(c) { c.fork = false; });
 						b.fork = to_fork;
@@ -287,7 +287,7 @@ function abacus() {
 						hilite = false;
 				}
 				ul.call(render, depth);
-				dispatch.hilite({ result: result, hilite: hilite });
+				dispatch.call("hilite", null, { result: result, hilite: hilite });
 		} // clickbar()
 
 		function resize() {

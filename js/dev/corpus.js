@@ -66,8 +66,8 @@ function corpus() {
                     .property("selected", function(d, i) { return !i; })
                 ;
                 controls.Court.select("select").each(function(d, i) {
-                    d3.select(this).on("change").apply(this, [d, i]);
-                  })
+                    d3.select(this).on("change").call(this, null, d, i);
+                })
                 ;
                 controls.Court.node().click();
                 controls.Phase.reset();
@@ -89,28 +89,28 @@ function corpus() {
         // Create a tree of data out of the collected rows.
         var leaves = [];
         rows.forEach(function(row) {
-            d3.entries(row.Phases)
-                .forEach(function(phase) {
-                    if(phase.key === "Overview") {
+            Object.entries(row.Phases)
+                .forEach(function([phaseKey, phaseValue]) {
+                    if(phaseKey === "Overview") {
                         leaves.push({ // This is a Court Leaf node
                                   State: row.State
                                 , USPS: row.Abbrev
                                 , Court: row.Court
-                                , Overview: categorify(phase.value.Category)
-                                , Description: phase.value["Text Box"] || null
+                                , Overview: categorify(phaseValue.Category)
+                                , Description: phaseValue["Text Box"] || null
                           })
                         ;
                         return;
                     } // Overview information
 
-                    var procs = processify(phase.value.Process);
+                    var procs = processify(phaseValue.Process);
                     procs.forEach(function(proc) {
                           leaves.push({
                                 State: row.State
                               , USPS: row.Abbrev
                               , Court: row.Court
-                              , Phase : phase.key
-                              , Category: categorify(phase.value.Category)
+                              , Phase : phaseKey
+                              , Category: categorify(phaseValue.Category)
                               , step: proc.step
                               , Process: proc.Process
                               , Type: proc.Type || null // nom comm + elections
@@ -131,9 +131,9 @@ function corpus() {
             if(typeof cat == "string")
                 ret = cat
             ;
-            else ret = d3.entries(cat) // Overview pseudo-phase
-                .filter(function(e) { return e.value === "Yes"; })
-                .map(function(k) { return k.key.trim(); })
+            else ret = Object.entries(cat) // Overview pseudo-phase
+                .filter(function([key, value]) { return value === "Yes"; })
+                .map(function([key, value]) { return key.trim(); })
               [0]
             ;
             return ret || "Not Applicable";
@@ -141,44 +141,44 @@ function corpus() {
 
         function processify(procs) {
             var ret = [];
-            d3.entries(procs)
-                .filter(function(p) {
-                    return p.value["Yes/No"] === "Yes"
-                  })
-                .forEach(function(p) {
-                    if(~p.key.toLowerCase().indexOf("confirmation"))
-                        ret.push(confirmify(p))
+            Object.entries(procs)
+                .filter(function([key, value]) {
+                    return value["Yes/No"] === "Yes"
+                })
+                .forEach(function([key, value]) {
+                    if(~key.toLowerCase().indexOf("confirmation"))
+                        ret.push(confirmify(key, value))
                     ;
-                    if(~p.key.toLowerCase().indexOf("elections"))
-                        electify(p).forEach(function(e) { ret.push(e); })
+                    if(~key.toLowerCase().indexOf("elections"))
+                        electify(key, value).forEach(function(e) { ret.push(e); })
                     ;
-                    if(~p.key.toLowerCase().indexOf("appointment"))
-                        ret.push(appointify(p))
+                    if(~key.toLowerCase().indexOf("appointment"))
+                        ret.push(appointify(key, value))
                     ;
-                    if(~p.key.toLowerCase().indexOf("nominat"))
-                        ret.push(committify(p))
+                    if(~key.toLowerCase().indexOf("nominat"))
+                        ret.push(committify(key, value))
                     ;
-                  })
+                })
             ;
             return ret;
         } // processify()
 
-        function electify(proc) {
-            return proc.value.Type.split(',')
+        function electify(procKey, procValue) {
+            return procValue.Type.split(',')
                 .map(function(t) {
                     return {
                           step: "Process"
-                        , Process: proc.key
-                        , Type: t.trim() + " " + proc.key
+                        , Process: procKey
+                        , Type: t.trim() + " " + procKey
                       }
                   })
             ;
         } // electify()
 
-        function appointify(proc) {
+        function appointify(procKey, procValue) {
             return {
                   step: "Process"
-                , Process: proc.key
+                , Process: procKey
               }
             ;
         } // appointify()
@@ -186,22 +186,22 @@ function corpus() {
         /*
          * Commissions & Confirmations.
          */
-        function committify(proc) {
+        function committify(procKey, procValue) {
           return {
                 step: "Nomination"
-              , Process: proc.key
-              , Type: proc.value.Type
+              , Process: procKey
+              , Type: procValue.Type
             }
           ;
         }
 
-        function confirmify(proc) {
-            var k = proc.value.Legislative ? "Legislative" : "Other";
+        function confirmify(procKey, procValue) {
+            var k = procValue.Legislative ? "Legislative" : "Other";
             return {
                   step: "Confirmation"
                 , Process: "Confirmation"
                 , Type: k
-                , Body: proc.value[k]
+                , Body: procValue[k]
               }
             ;
         } // confirmify()
@@ -221,97 +221,109 @@ function corpus() {
      *   - a way to get to the next level down
     **/
     function count() {
+        // Helper to convert nested Map to plain object (D3 v7 compatibility)
+        function mapToObject(map) {
+            if (!(map instanceof Map)) return map;
+            var obj = {};
+            map.forEach(function(value, key) {
+                obj[key] = mapToObject(value);
+            });
+            return obj;
+        }
+
+        // Helper to convert d3.groups output to old {key, values} format
+        function groupsToEntries(data, keyFn) {
+            return d3.groups(data, keyFn).map(function(pair) {
+                return { key: pair[0], values: pair[1] };
+            });
+        }
+
         // Local helper function
         var overview = dom.datum().filter(function(l) { return l.Overview; })
           , details = dom.datum().filter(function(l) { return l.Phase; })
           , skeleton = {
-                  Court: d3.nest()
-                    .key(function(d) { return d.Court; })
-                    .key(function(d) { return d.Overview; })
-                    .rollup(function(leaves) {
-                        return d3.nest()
-                            .key(function(d) { return d.USPS; })
-                            .entries(leaves)
-                        ;
-                      })
-                    .map(overview)
-                , Phase: d3.nest()
-                    .key(function(d) { return d.Court; })
-                    .key(function(d) { return d.Phase; })
-                    .key(function(d) { return d.Category; })
-                    .rollup(function(leaves) {
-                        return d3.nest()
-                            .key(function(d) { return d.USPS; })
-                            .entries(leaves)
-                        ;
-                      })
-                    .map(details)
-                , Process: d3.nest()
-                    .key(function(d) { return d.Court; })
-                    .key(function(d) { return d.Phase; })
-                    .key(function(d) { return d.Category; })
-                    .key(function(d) {
-                        return d.Process === "Elections" ? d.Type : d.Process;
-                      })
-                    .rollup(function(leaves) {
+                  Court: mapToObject(d3.rollup(overview,
+                    function(leaves) {
+                        return groupsToEntries(leaves, function(d) { return d.USPS; });
+                    },
+                    function(d) { return d.Court; },
+                    function(d) { return d.Overview; }
+                  ))
+                , Phase: mapToObject(d3.rollup(details,
+                    function(leaves) {
+                        return groupsToEntries(leaves, function(d) { return d.USPS; });
+                    },
+                    function(d) { return d.Court; },
+                    function(d) { return d.Phase; },
+                    function(d) { return d.Category; }
+                  ))
+                , Process: mapToObject(d3.rollup(details,
+                    function(leaves) {
                         var complex = leaves.filter(function(d) {
                                 return d.step !== "Process";
-                              })
-                          , nester = d3.nest()
+                            })
+                          , keys = []
                         ;
                         if(complex.length) {
-                            nester.key(function(d) { return d.Type; });
-
+                            keys.push(function(d) { return d.Type; });
                             if(complex.some(function(d) { return d.Body; }))
-                                nester.key(function(d) { return d.Body; })
-                            ;
-                        } else
-                            complex = null
-                        ;
-                        return nester.key(function(d) { return d.USPS; })
-                            .map(complex || leaves)
-                        ;
-                      })
-                    .map(details)
+                                keys.push(function(d) { return d.Body; });
+                        } else {
+                            complex = null;
+                        }
+                        keys.push(function(d) { return d.USPS; });
+                        // Build nested grouping with dynamic keys
+                        var result = d3.group.apply(null, [complex || leaves].concat(keys));
+                        return mapToObject(result);
+                    },
+                    function(d) { return d.Court; },
+                    function(d) { return d.Phase; },
+                    function(d) { return d.Category; },
+                    function(d) { return d.Process === "Elections" ? d.Type : d.Process; }
+                  ))
               }
         ;
         // RESET the counts object, then populate it
         counts = { Court: {}, Phase: {}};
         pivots = { Court: [], Phase: []}
-        d3.map(skeleton.Court).forEach(function(crt, cats) {
+        Object.entries(skeleton.Court).forEach(function([crt, cats]) {
             var tmp = crt.split(' ');
             tmp.pop(); // pop the "Court" off the name
-            var  court = tmp.pop();
+            var court = tmp.pop();
             pivots.Court.push({ key: court, value: crt });
             // Create the tree of Court counts
-            counts.Court[court] = d3.entries(cats).map(leafify);
+            counts.Court[court] = Object.entries(cats).map(function([key, value]) {
+                return leafify({ key: key, value: value });
+            });
             counts.Phase[court] = {};
 
             // Navigate the tree of Phase counts at this Court level
-            d3.map(skeleton.Process[crt])
-                .forEach(function(faze, cats) {
+            Object.entries(skeleton.Process[crt])
+                .forEach(function([faze, cats]) {
                     var phase = faze.split(' ')[0];
                     pivots.Phase.push({ key: phase, value: faze })
-                    counts.Phase[court][phase] = d3.entries(cats)
-                        .map(processize)
+                    counts.Phase[court][phase] = Object.entries(cats)
+                        .map(function([key, value]) {
+                            return processize({ key: key, value: value });
+                        })
                         .map(function(cat) {
                             cat.values = cat.values ||
                                 skeleton.Phase[crt][faze][cat.key]
                                     .map(multistatify)
                             ;
                             return cat;
-                          })
+                        })
                     ;
-                  })
+                })
             ;
-          })
-        ;
-        pivots.Phase = d3.nest()
-            .key(identikey)
-            .rollup(function(leaves) { return leaves[0]; })
-            .entries(pivots.Phase)
-            .map(function(d) { return d.values; })
-        ;
+        });
+        // Deduplicate pivots.Phase by key, keeping first occurrence
+        pivots.Phase = Array.from(
+            pivots.Phase.reduce(function(map, item) {
+                if (!map.has(item.key)) map.set(item.key, item);
+                return map;
+            }, new Map()).values()
+        );
         return;
 
         // Local Helpers
@@ -320,18 +332,15 @@ function corpus() {
                 s.value = s.values.pop();
                 s.values = null;
                 return s;
-              })
-            ;
+            });
             d.value = null;
             return d;
         } // leafify()
 
         function statify(b) {
-            return d3.entries(b).map(function(s) {
-                s.value = s.value[0];
-                return s;
-              })
-            ;
+            return Object.entries(b).map(function([key, value]) {
+                return { key: key, value: value[0] };
+            });
         } // statify()
 
         function multistatify(s) {
@@ -344,65 +353,67 @@ function corpus() {
                   key: cat.key
                 , children: []
                 , values: null
-              }
-            ;
-            d3.entries(cat.value).forEach(function(proc) {
-                if(proc.key === cat.key) {
-                    node.values = statify(proc.value);
-                    return proc;
+            };
+            Object.entries(cat.value).forEach(function([procKey, procValue]) {
+                if(procKey === cat.key) {
+                    node.values = statify(procValue);
+                    return;
                 }
                 if(cat.key !== "Commission Reappoints") // Hawaii
-                    node.children.push(process_process(proc))
+                    node.children.push(process_process({ key: procKey, value: procValue }))
                 ;
-              })
-            ;
+            });
             return node;
         } // processize()
 
       function process_process(proc) {
           switch(proc.key) {
               case "Nominating Commission":
-                  proc.children = d3.entries(proc.value)
-                      .map(function(comtype) { // (Non-)Binding
-                          comtype.values = statify(comtype.value);
-                          comtype.value = null;
-                          comtype.level = "Commission";
-                          return comtype;
-                        })
+                  proc.children = Object.entries(proc.value)
+                      .map(function([key, value]) { // (Non-)Binding
+                          return {
+                              key: key,
+                              values: statify(value),
+                              value: null,
+                              level: "Commission"
+                          };
+                      })
                   ;
-                  proc.values = d3.values(proc.value)
+                  proc.values = Object.values(proc.value)
                       .map(statify)
                       .reduce(flatten)
                   ;
                   break;
               case "Confirmation":
-                  proc.values = d3.values(proc.value)
+                  proc.values = Object.values(proc.value)
                       .map(function(f) {
-                          return d3.values(f)
+                          return Object.values(f)
                               .map(statify)
                               .reduce(flatten)
                           ;
-                        })
+                      })
                       .reduce(flatten)
                   ;
-                  proc.children = d3.entries(proc.value)
-                      .map(function(conftype) {
-                          conftype.values = d3.values(conftype.value)
-                              .map(statify)
-                              .reduce(flatten)
-                          ;
-                          conftype.children = d3.entries(conftype.value)
-                              .map(function(body) {
-                                  body.values = statify(body.value);
-                                  body.value = null;
-                                  body.level = "Body";
-                                  return body;
-                              })
-                          ;
-                          conftype.value = null;
-                          conftype.level = "Confirmation";
-                          return conftype;
-                        })
+                  proc.children = Object.entries(proc.value)
+                      .map(function([conftypeKey, conftypeValue]) {
+                          return {
+                              key: conftypeKey,
+                              values: Object.values(conftypeValue)
+                                  .map(statify)
+                                  .reduce(flatten),
+                              children: Object.entries(conftypeValue)
+                                  .map(function([bodyKey, bodyValue]) {
+                                      return {
+                                          key: bodyKey,
+                                          values: statify(bodyValue),
+                                          value: null,
+                                          level: "Body"
+                                      };
+                                  }),
+                              value: null,
+                              level: "Confirmation"
+                          };
+                      })
                   ;
                   break;
               default:
@@ -422,7 +433,7 @@ function corpus() {
     function run_query(arg) {
         query[arg.key] = arg.value;
         if(arg.key === "State") {
-            dispatch.state(query);
+            dispatch.call("state", null, query);
             set_url(query);
             return;
         }
@@ -431,7 +442,7 @@ function corpus() {
           : query.result = counts.Phase[query.Court][query.Phase]
         ;
         if(query.result) {
-            dispatch.display(query);
+            dispatch.call("display", null, query);
             set_url(query);
         }
         return;
@@ -497,8 +508,8 @@ function corpus() {
                   })
             ;
             dropdown.each(function(d, i) {
-                d3.select(this).on("change").apply(this, [d, i]);
-              })
+                d3.select(this).on("change").call(this, null, d, i);
+            })
             ;
             controls.Court.node().click();
         }
