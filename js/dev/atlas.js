@@ -1,6 +1,6 @@
 function atlas() {
     /* Private Variables */
-    var path = d3.geo.path().projection(null)
+    var path = d3.geoPath().projection(null)
       , width = 960
       , height = 600
       , margin = { top: 10, left: 20, right: 20, bottom: 10 }
@@ -27,11 +27,9 @@ function atlas() {
         if(~browser.indexOf("ie")) {
             svg
                 .attr("preserveAspectRatio", "xMidYMin slice")
-                .style({
-                      width: "100%"
-                    , height: "1px"
-                    , overflow: "visible"
-                  })
+                .style("width", "100%")
+                .style("height", "1px")
+                .style("overflow", "visible")
                 .style("padding-bottom", (100 * height / width) + "%")
             ;
         }
@@ -108,7 +106,10 @@ function atlas() {
         states
           .append("rect")
             .attr("class", "click-target")
-            .attr({ x: 0, y: 0, width: "100%", height: "100%" })
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width", "100%")
+            .attr("height", "100%")
           .on("click", function() {
               control.value("all");
             })
@@ -127,19 +128,19 @@ function atlas() {
             .attr("d", function(d) { return path(d.feature); })
             .attr("pointer-events", "all")
             .attr("cursor", "pointer")
-            .on("click", function(d) {
+            .on("click", function(event, d) {
                 var abbr = d.feature.properties.usps;
                 control
                     .value(abbr === control.value() ? "all" : abbr)
                 ;
-              })
-            .on("mouseover", function(d) {
+            })
+            .on("mouseover", function(event, d) {
                 tooltip
                     .html(d.feature.properties.name)
-                    .show()
+                    .show(event, d)
                 ;
-              })
-            .on("mouseout", tooltip.hide)
+            })
+            .on("mouseout", function(event, d) { tooltip.hide(event, d); })
         ;
         // State Stamps
         svg.select("defs")
@@ -165,9 +166,11 @@ function atlas() {
             .attr("patternTransform", function(d, i) {
                 return "rotate(" + (i * 90 + 10) + " 0 0)";
               })
-            .attr({ width: 10, height: 10 })
+            .attr("width", 10)
+            .attr("height", 10)
           .append("rect")
-            .attr({ width: 4, height: 10 })
+            .attr("width", 4)
+            .attr("height", 10)
             .attr("transform", "translate(0,0)")
             .attr("class", "confirmation")
         ;
@@ -246,10 +249,10 @@ function atlas() {
         if(!confs.length) {
             svg.selectAll(".overlay")
               .transition().duration(duration)
-                .each("start", function() {
+                .on("start", function() {
                     d3.select(this).classed("soften", true);
-                  })
-                .each("end", function() { d3.select(this).remove(); })
+                })
+                .on("end", function() { d3.select(this).remove(); })
             ;
         }
     } // update()
@@ -288,17 +291,17 @@ function atlas() {
 
         svg.select("#states").selectAll(".state")
           .transition()
-            .each("start", function(d) {
+            .on("start", function(d) {
                 if(d.feature.properties.usps === state) {
                     this.parentNode.parentNode.appendChild(this.parentNode);
                     this.parentNode.appendChild(this);
                 }
-              })
-            .each("end", function(d) {
+            })
+            .on("end", function(d) {
                 d3.select(this)
                     .classed("clicked", d.feature.properties.usps === state)
                 ;
-              })
+            })
         ;
     } // outline()
 

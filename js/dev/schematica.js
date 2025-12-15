@@ -41,12 +41,11 @@ function slugify(d)     {
     ;
 } // slugify()
 
-d3_queue.queue()
-  .defer(d3.text, files.bcj)
-  .defer(d3.csv, files.info)
-  .defer(d3.json, files.geo)
-  .await(function(error, bcj, info, geo) {
-      if(error) throw error;
+Promise.all([
+    d3.text(files.bcj),
+    d3.csv(files.info),
+    d3.json(files.geo)
+]).then(function([bcj, info, geo]) {
 
       var data = ingest(bcj)
         , panels = {
@@ -59,11 +58,12 @@ d3_queue.queue()
       /*
        * Parse the reference file
        */
-      reference = d3.nest()
-          .key(function(d) { return d.Term; })
-          .rollup(function(leaves) { return leaves[0]; })
-          .map(info)
-      ;
+      reference = info.reduce(function(acc, d) {
+          if (!acc.hasOwnProperty(d.Term)) {
+              acc[d.Term] = d;
+          }
+          return acc;
+      }, {});
       /*
        * Use the csv file to build a query selector
        */
@@ -96,10 +96,9 @@ d3_queue.queue()
       /*
        * Messaging/signaling infrastructure
        */
-      d3.map(panels).forEach(function(n, panel) {
+      Object.entries(panels).forEach(function([n, panel]) {
           panel.connect(signal);
-        })
-      ;
+      });
       /*
        * Cross-wiring -- future work to make this more elegant
        */
@@ -125,8 +124,9 @@ d3_queue.queue()
 
       window.onpopstate = function(event) { panels.corpus.start(getQueryVariables()); };
       window.onresize = function(event) { panels.atlas.resize(); panels.abacus.resize(); };
-  })
-;
+}).catch(function(error) {
+    throw error;
+});
 
 // Capture URL query param
 function getQueryVariables() {
@@ -150,7 +150,7 @@ function getQueryVariables() {
  * Ingest, Parse, and Simplify the data set.
  */
 function ingest(text) {
-    var rows = d3.csv.parseRows(text)
+    var rows = d3.csvParseRows(text)
       , headers = []
       , ref = [] // reference headers
       , row
