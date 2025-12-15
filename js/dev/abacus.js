@@ -107,7 +107,7 @@ function abacus() {
 				;
 				var bar = row
 				  .append("div")
-						.attr("class", "col-xs-5 legend-bar-container")
+						.attr("class", "col-5 legend-bar-container")
 						.attr("role", "presentation")
 						.attr("pointer-events", "all")
 						.attr("data-balloon-pos", "up")
@@ -131,7 +131,7 @@ function abacus() {
 				;
 				var div = row
 				  .append("div")
-						.attr("class", "col-xs-7 legend-label-container")
+						.attr("class", "col-7 legend-label-container")
 						.attr("pointer-events", "all")
 						.attr("data-balloon", function(d) {
 								var ref =  reference[d.key]

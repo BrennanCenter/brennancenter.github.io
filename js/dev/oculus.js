@@ -29,7 +29,7 @@ function oculus() {
         var phase = dom.select("#locus").selectAll("div")
               .data(data, identikey)
             .enter().append("div")
-                .attr("class", "phase col-md-4 col-xs-12")
+                .attr("class", "phase col-md-4 col-12")
         ;
         phase
           .append("h5")
